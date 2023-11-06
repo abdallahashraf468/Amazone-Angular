@@ -1,40 +1,50 @@
 import { InavbarData } from "./helper";
 
-export const navbarData : InavbarData[] = [
+export const navbarData: InavbarData[] = [
   {
     routeLink: 'dashboard',
-    icon : 'fal fa-home',
-    label : 'Dashboard',
+    icon: 'fal fa-home',
+    label: 'Dashboard',
   },
   {
     routeLink: 'products',
-    icon : 'fal fa-box-open',
-    label : 'Products',
-    items : [
+    icon: 'fal fa-box-open',
+    label: 'Products',
+    items: [
       {
         routeLink: 'products/list',
-        label : 'Products List',
+        label: 'Products List',
       }
     ]
   },
   {
     routeLink: 'statistics',
-    icon : 'fal fa-chart-bar',
-    label : 'Statistics',
+    icon: 'fal fa-chart-bar',
+    label: 'Statistics',
   },
   {
     routeLink: 'coupens',
-    icon : 'fal fa-tags',
-    label : 'Coupens',
+    icon: 'fal fa-tags',
+    label: 'Coupens',
+    items: [
+      {
+        routeLink: 'coupens/list',
+        label: 'List Coupens',
+      },
+      {
+        routeLink: 'coupens/create',
+        label: 'Create Coupens',
+      }
+    ],
   },
   {
     routeLink: 'media',
-    icon : 'fal fa-camera',
-    label : 'Media',
+    icon: 'fal fa-camera',
+    label: 'Media',
   },
   {
     routeLink: 'settings',
-    icon : 'fal fa-cog',
-    label : 'Settings',
+    icon: 'fal fa-cog',
+    label: 'Settings',
   },
 ]

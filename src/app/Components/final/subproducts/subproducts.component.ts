@@ -1,11 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InavbarData } from '../side-menu/helper';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-subproducts',
   templateUrl: './subproducts.component.html',
   styleUrls: ['../side-menu/side-menu.component.css'],
-  animations: []
+  animations: [
+    trigger('submenu',[
+      state('hidden',style({
+        height : '0',
+        overflow : 'hidden',
+      })),
+      state('visible',style({
+        height : '*',
+      })),
+      transition('visible <=> hidden',[style({overflow : 'hidden'}),animate('{{transitionParams}}')]),
+      transition('void => *',animate(0)),
+    ])
+  ]
+
 })
 export class SubproductsComponent implements OnInit {
   @Input() data: InavbarData = {
