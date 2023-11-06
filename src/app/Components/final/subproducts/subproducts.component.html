@@ -1,0 +1,25 @@
+<ul *ngif='collapsed && data.items && data.items.length > 0 ' class="sub">
+  <li *ngFor="let item of data.items" class="sub-item">
+    <a *ngIf="item.items && item.items.length > 0 " class="sub-link"
+      (click)="handleClick(item)"
+      >
+      <i class="sub-link-icon fa fa-circle"></i>
+      <span class="sub-link-text" *ngIf="collapsed">
+        {{item.label}}
+      </span>
+      <i *ngIf="item.items && collapsed " class="menu-collapse-icon"
+        [ngClass]="!item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'"></i>
+    </a>
+    <a href="" class="sub-link" *ngIf="!item.items || (item.items && item.items.length == 0) "
+      [routerLink]="[item.routeLink]" routerLinkActive="active-sub" [routerLinkActiveOptions]="{exact: true}">
+      <i class="sub-link-icon fa fa-circle"></i>
+      <span class="sub-link-text" *ngIf="collapsed">
+        {{item.label}}
+      </span>
+    </a>
+    <div *ngIf="item.items && item.items.length > 0 ">
+      <app-subproducts [collapsed]="collapsed" [expanded]="item.expanded" [multiple]="multiple">
+      </app-subproducts>
+    </div>
+  </li>
+</ul>
