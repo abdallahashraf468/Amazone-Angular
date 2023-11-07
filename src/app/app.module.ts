@@ -33,6 +33,7 @@ import { MediaComponent } from './Components/final/media/media.component';
 import { SettingsComponent } from './Components/final/settings/settings.component';
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
+import { HeaderComponent } from './Components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { SubmenuComponent } from './Components/final/side-menu/submenu.component
     SettingsComponent,
     BodyComponent,
     SubmenuComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
