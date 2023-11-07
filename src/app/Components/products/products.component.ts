@@ -4,6 +4,8 @@ import { Iproduct } from 'src/app/Models/iproduct';
 import { Store } from 'src/app/Models/store';
 import { ProductsService } from 'src/app/Services/products.service';
 import { ProductsApiService } from './../../Services/products-api.service';
+import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
+import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
 
 
 @Component({
@@ -18,18 +20,25 @@ export class ProductsComponent implements OnInit {
   selectedCategory: number = 0;
   filterProductsList: Iproduct[] = [];
   date = new Date();
+  prds:IfireBseProduct[]=[];
+  prdToAdd: IfireBseProduct = {} as IfireBseProduct;
+  coverImageFileName: string = '';
+  prodductImageFileName: string = '';
 
-  constructor(private prdService: ProductsService, private router: Router, private productsApiService: ProductsApiService) {
+
+  constructor(private prdService: ProductsService, private router: Router, private productsApiService: ProductsApiService,
+    private fireBase:FirebasePrdService) {
+
     this.ClientName = "Muhammad Omar";
-    this.productsApiService.getAllProducts().subscribe({
-      next: (data) => {
-        this.filterProductsList = data;
-        // console.log(data);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    // this.productsApiService.getAllProducts().subscribe({
+    //   next: (data) => {
+    //     this.filterProductsList = data;
+    //     // console.log(data);
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // })
     // this.onaddNewPrd = new EventEmitter<Iproduct>();
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // this.ProductsList = [
@@ -45,8 +54,62 @@ export class ProductsComponent implements OnInit {
     // ]
   }
 
+  getProducts(){
+    this.fireBase.getProducts().subscribe({
+      next: (data) => {
+        console.log(data);
+        // Map Firestore documents to IfireBseProduct interface
+        this.prds = data.map((documentData: any) => {
+          return {
+            brand: documentData.brand,
+            category: documentData.category,
+            createdAt: documentData.createdAt,
+            description: documentData.description,
+            id: documentData.id,
+            imageCover: documentData.imageCover,
+            images: documentData.images,
+            price: documentData.price,
+            priceAfterDiscount: documentData.priceAfterDiscount,
+            quantity: documentData.quantity,
+            ratingsAverage: documentData.ratingsAverage,
+            ratingsQuantity: documentData.ratingsQuantity,
+            slug: documentData.slug,
+            sold: documentData.sold,
+            subcategory: documentData.subcategory,
+            title: documentData.title,
+            updatedAt: documentData.updatedAt,
+            _id: documentData._id
+          };
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+  addProduct(){
+    this.fireBase.addProduct(this.prdToAdd);
+    this.getProducts();
+  }
+
+  onImageCoverSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files?.length) {
+      this.coverImageFileName = inputElement.files[0].name;
+    }
+  }
+  
+  onImagesSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files?.length) {
+      this.prodductImageFileName = inputElement.files[0].name;
+    }
+  }
+  
+
   ngOnInit(): void {
     this.filterProductsList = this.prdService.ProductsList;
+    this.getProducts();
   }
 
   //cart

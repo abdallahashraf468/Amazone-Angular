@@ -43,5 +43,35 @@
         </ng-container>
       </div>
     </div>
+    <div class="container fluid card-body" id="firePrd">
+      <div class="row card-body">
+        <ng-container *ngFor="let prd of prds">
+          <div class="col-6 mb-3 text-center pt-4 card-body" appprdCard
+            [ngClass]="{'bg-warning': prd.quantity < 2}">
+            <!-- <img [src]="prd.images[0]" alt="{{ prd.title }}" width="200"> -->
+            <img [src]="prd.images && prd.images.length > 0 ? prd.images[0] : ''" alt="{{ prd.title }}" width="200">
+
+            <h2>{{ prd.title | uppercase }}</h2>
+            <p>Price: {{ prd.price | currency:'EGP' }}</p>
+            <p>Quantity: {{ prd.quantity }}</p>
+            <ng-container [ngSwitch]="prd.quantity">
+              <ng-container *ngSwitchCase="1">Last one item</ng-container>
+              <ng-container *ngSwitchCase="2">Last two items</ng-container>
+              <ng-container *ngSwitchCase="0">Out of Stock</ng-container>
+              <ng-container *ngSwitchDefault>In Stock</ng-container>
+            </ng-container>
+            <div>
+              <ng-container *ngIf="prd.quantity > 2 ; else QuantityLimitedRef">Available</ng-container>
+              <ng-template #QuantityLimitedRef>Quantity is Limited</ng-template>
+            </div>
+            <button class="btn btn-danger" [disabled]="prd.quantity==0"
+              [ngStyle]="{'background-color': prd.quantity < 2 ? 'red' : 'green', 'color': 'white'}">Add To Cart<i
+                class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i></button>
+            <button class="btn btn-warning">details</button>
+            <!-- [routerLink]="['/details', product.id]" -->
+          </div>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>
