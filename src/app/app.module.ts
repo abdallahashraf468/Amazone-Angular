@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { HeaderComponent } from './Components/header/header.component';
-import { ProductsComponent } from './Components/products/products.component';
+// import { ProductsComponent } from './Components/products/products.component';
 // import { FooterComponent } from './Components/footer/footer.component';
 import { SideMenuComponent } from './Components/final/side-menu/side-menu.component';
 // import { NavigationBarComponent } from './Components/navigation-bar/navigation-bar.component';
@@ -27,7 +27,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 // import { UserRactiveFormComponent } from './Components/User/user-ractive-form/user-ractive-form.component';
 import { DashboardComponent } from './Components/final/dashboard/dashboard.component';
 import { StatisticsComponent } from './Components/final/statistics/statistics.component';
-import { CoupensComponent } from './Components/final/coupens/coupens.component';
 // import { SubproductsComponent } from './Components/final/subproducts/subproducts.component';
 import { PagesComponent } from './Components/final/pages/pages.component';
 import { MediaComponent } from './Components/final/media/media.component';
@@ -39,7 +38,7 @@ import { SubmenuComponent } from './Components/final/side-menu/submenu.component
   declarations: [
     AppComponent,
     // HeaderComponent,
-    ProductsComponent,
+    // ProductsComponent,
     // FooterComponent,
     SideMenuComponent,
     // NavigationBarComponent,
@@ -58,7 +57,6 @@ import { SubmenuComponent } from './Components/final/side-menu/submenu.component
     // UserRactiveFormComponent,
     DashboardComponent,
     StatisticsComponent,
-    CoupensComponent,
     // SubproductsComponent,
     PagesComponent,
     MediaComponent,

@@ -24,12 +24,19 @@ const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: 'dashboard', component: DashboardComponent, title: "dashboard" },
   { path: 'statistics', component: StatisticsComponent, title: "statistics" },
-  { path: 'coupens', component: CoupensComponent, title: "coupens" },
-  { path: 'media', component: MediaComponent , title: "media" },
+  {
+    path: 'coupens',
+    loadChildren: () => import('./Components/final/coupens/coupens.module').then(m => m.CoupensModule),
+  },
+  { path: 'media', component: MediaComponent, title: "media" },
   { path: 'settings', component: SettingsComponent, title: "settings" },
 
   // { path: "home", component: ParentCComponent, title: "Home Page" },
-  { path: "products", component: ProductsComponent, title: "products Page" },
+  // { path: "products", component: ProductsComponent, title: "products Page" },
+  {
+    path: "products",
+    loadChildren: () => import('./Components/products/products.module').then(m => m.ProductsModule),
+  },
   // { path: "parent", component: ParentCComponent, title: "products-parent Page", canActivate: [userGuard] },
   // { path: "category", component: CategoryComponent, title: "category Page", canActivate: [userGuard] },
   // { path: "about", component: AboutComponent, title: "About-Us Page" },

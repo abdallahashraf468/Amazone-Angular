@@ -1,7 +1,8 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './nav-data';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { InavbarData } from './helper';
+import { InavbarData, fadeInOut } from './helper';
+import { Router } from '@angular/router';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -13,20 +14,7 @@ interface SideNavToggle {
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css'],
   animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('350ms',
-          style({ opacity: 1 })
-        )
-      ]),
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate('350ms',
-          style({ opacity: 0 })
-        )
-      ])
-    ]),
+    fadeInOut,
     trigger('rotate', [
       transition(':enter', [
         animate('1000ms',
@@ -55,6 +43,9 @@ export class SideMenuComponent implements OnInit {
     }
   }
 
+
+  constructor(public router: Router ) { }
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
   }
@@ -78,6 +69,9 @@ export class SideMenuComponent implements OnInit {
     item.expanded = !item.expanded;
   }
 
+  getActiveClass(data: InavbarData):string {
+    return this.router.url.includes(data.routeLink) ? 'active' : '';
+  }
 
 
 }

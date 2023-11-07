@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { InavbarData } from '../side-menu/helper';
+import { InavbarData, fadeInOut } from '../side-menu/helper';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-submenu',
@@ -9,9 +10,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   params: {transitionParams:'400ms cubic-bezier(0.86,0,0.07,1)', height:'*' }}
     : {value:'hidden', params:{transitionParams:'400ms cubic-bezier(0.86,0,0.07,1)', height:'0'}}" class="sub">
 <li *ngFor="let item of data.items" class="sub-item">
-  <a *ngIf="item.items && item.items.length > 0 " class="sub-link" (click)="handleClick(item)">
+  <a *ngIf="item.items && item.items.length > 0 " [ngClass]="getActiveClass(item)" class="sub-link" (click)="handleClick(item)">
     <i class="sub-link-icon fa fa-circle"></i>
-    <span class="sub-link-text" *ngIf="collapsed">
+    <span class="sub-link-text" @fadeInOut *ngIf="collapsed">
       {{item.label}}
     </span>
     <i *ngIf="item.items && collapsed " class="menu-collapse-icon"
@@ -20,7 +21,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   <a class="sub-link" *ngIf="!item.items || (item.items && item.items.length === 0) "
     [routerLink]="[item.routeLink]" routerLinkActive="active-sub" [routerLinkActiveOptions]="{exact: true}">
     <i class="sub-link-icon fa fa-circle"></i>
-    <span class="sub-link-text" *ngIf="collapsed">
+    <span class="sub-link-text" @fadeInOut *ngIf="collapsed">
       {{item.label}}
     </span>
   </a>
@@ -35,6 +36,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   `,
   styleUrls: ['./side-menu.component.css'],
   animations: [
+    fadeInOut,
     trigger('submenu', [
       state('hidden', style({
         height: '0',
@@ -60,6 +62,8 @@ export class SubmenuComponent implements OnInit {
   @Input() expanded: boolean | undefined;
   @Input() multiple: boolean = false;
 
+  constructor(public router: Router ) { }
+
   ngOnInit(): void {
     console.log('SideMenuComponent initialized with data:', this.data);
     console.log('collapsed:', this.collapsed);
@@ -83,6 +87,10 @@ export class SubmenuComponent implements OnInit {
 
     item.expanded = !item.expanded;
     console.log('SubmenuComponent item.expanded state:', item.expanded);
+  }
+
+  getActiveClass(item: InavbarData): string {
+    return item.expanded && this.router.url.includes(item.routeLink) ? 'active-sub' : '';
   }
 
 }
