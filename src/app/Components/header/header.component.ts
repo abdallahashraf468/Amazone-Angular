@@ -1,14 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkCanShowSearchAsOverlay(window.innerWidth);
+  }
+
+  ngOnInit(): void {
+    this.checkCanShowSearchAsOverlay(window.innerWidth);
+  }
 
   @Input() collapsed = false;
   @Input() screenWidth = 0;
+
+  canShowSearchAsOverlay = false;
 
 
   getHeadClass(): string {
@@ -19,6 +30,14 @@ export class HeaderComponent {
       styleClass = 'head-m-screen';
     }
     return styleClass;
+  }
+
+  checkCanShowSearchAsOverlay(innerWidth: number):void{
+    if(innerWidth < 845){
+      this.canShowSearchAsOverlay = true;
+    }else {
+      this.canShowSearchAsOverlay = false;
+    }
   }
 
 }

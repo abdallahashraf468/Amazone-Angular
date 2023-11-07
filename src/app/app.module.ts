@@ -34,6 +34,9 @@ import { SettingsComponent } from './Components/final/settings/settings.componen
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
+import {OverlayModule } from '@angular/cdk/overlay';
+import {CdkMenuModule } from '@angular/cdk/menu';
+
 
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -86,6 +89,8 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    OverlayModule,
+    CdkMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
