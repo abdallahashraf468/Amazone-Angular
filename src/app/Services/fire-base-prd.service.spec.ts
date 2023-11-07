@@ -1,16 +1,16 @@
-// import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-// import { FirebasePrdService } from './fire-base-prd.service';
+import { FirebasePrdService } from './fire-base-prd.service';
 
-// describe('FireBasePrdService', () => {
-//   let service: FirebasePrdService;
+describe('FireBasePrdService', () => {
+  let service: FirebasePrdService;
 
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({});
-//     service = TestBed.inject(FirebasePrdService);
-//   });
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(FirebasePrdService);
+  });
 
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
-// });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

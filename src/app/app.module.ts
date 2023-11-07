@@ -38,6 +38,17 @@ import {OverlayModule } from '@angular/cdk/overlay';
 import {CdkMenuModule } from '@angular/cdk/menu';
 
 
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+const firebaseConfig = {
+  apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
+  authDomain: "fir-88026.firebaseapp.com",
+  projectId: "fir-88026",
+  storageBucket: "fir-88026.appspot.com",
+  messagingSenderId: "947539259472",
+  appId: "1:947539259472:web:f1f9925e12528cdfe92155"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +87,8 @@ import {CdkMenuModule } from '@angular/cdk/menu';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),
     OverlayModule,
     CdkMenuModule,
   ],
