@@ -21,7 +21,7 @@
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label}}</span>
       </a>
       <div *ngIf="collapsed && data.items && data.items.length > 0">
-        <app-subproducts [data]="data" [collapsed]="collapsed" [multiple]="multiple" [expanded]="data.expanded"></app-subproducts>
+        <app-submenu [data]="data" [collapsed]="collapsed" [multiple]="multiple" [expanded]="data?.expanded"></app-submenu>
       </div>
     </li>
   </ul>

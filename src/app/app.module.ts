@@ -28,11 +28,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './Components/final/dashboard/dashboard.component';
 import { StatisticsComponent } from './Components/final/statistics/statistics.component';
 import { CoupensComponent } from './Components/final/coupens/coupens.component';
-import { SubproductsComponent } from './Components/final/subproducts/subproducts.component';
+// import { SubproductsComponent } from './Components/final/subproducts/subproducts.component';
 import { PagesComponent } from './Components/final/pages/pages.component';
 import { MediaComponent } from './Components/final/media/media.component';
 import { SettingsComponent } from './Components/final/settings/settings.component';
 import { BodyComponent } from './Components/final/body/body.component';
+import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 
 @NgModule({
   declarations: [
@@ -58,11 +59,12 @@ import { BodyComponent } from './Components/final/body/body.component';
     DashboardComponent,
     StatisticsComponent,
     CoupensComponent,
-    SubproductsComponent,
+    // SubproductsComponent,
     PagesComponent,
     MediaComponent,
     SettingsComponent,
     BodyComponent,
+    SubmenuComponent,
   ],
   imports: [
     BrowserModule,
