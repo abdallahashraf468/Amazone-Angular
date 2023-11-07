@@ -34,6 +34,9 @@ import { SettingsComponent } from './Components/final/settings/settings.componen
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
+import {OverlayModule } from '@angular/cdk/overlay';
+import {CdkMenuModule } from '@angular/cdk/menu';
+
 
 @NgModule({
   declarations: [
@@ -72,7 +75,9 @@ import { HeaderComponent } from './Components/header/header.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    OverlayModule,
+    CdkMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
