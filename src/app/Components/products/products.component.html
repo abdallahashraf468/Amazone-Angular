@@ -1,0 +1,77 @@
+<div id="all">
+  <h1>{{ store.name }}</h1>
+  <p>{{ date | date:'longDate' }}</p>
+  <div class="card">
+    <div class="container fluid card-head" id="sproduct">
+      <!-- <div>Credit Card No. {{ '2500008882562575' | creditCard }}</div> -->
+      <br>
+      <select [(ngModel)]="selectedCategory" (change)="filterPrds()">
+        <option value="0">All Categories</option>
+        <option *ngFor="let opt of optionList" [value]="opt"> Category {{ opt }}</option>
+      </select>
+      <label for="filterByName" class="col-md-2">Filter By Name:</label>
+      <input type="text" id="filterByName" name="filterByName" class="form-control col-md-10" [(ngModel)]="filterName">
+      <h1>{{filterName}}</h1>
+    </div>
+
+    <div class="container fluid card-body" id="fproduct">
+      <div class="row card-body">
+        <ng-container *ngFor="let product of filterProductsList">
+          <div class="col-6 mb-3 text-center pt-4 card-body" appProductCard
+            [ngClass]="{'bg-warning': product.quantity < 2}">
+            <img [src]="product.PrdimgURL" alt="{{ product.name }}" width="200">
+            <h2>{{ product.name | uppercase }}</h2>
+            <p>Price: {{ product.price | currency:'EGP' }}</p>
+            <p>Quantity: {{ product.quantity }}</p>
+            <ng-container [ngSwitch]="product.quantity">
+              <ng-container *ngSwitchCase="1">Last one item</ng-container>
+              <ng-container *ngSwitchCase="2">Last two items</ng-container>
+              <ng-container *ngSwitchCase="0">Out of Stock</ng-container>
+              <ng-container *ngSwitchDefault>In Stock</ng-container>
+            </ng-container>
+            <div>
+              <ng-container *ngIf="product.quantity > 2 ; else QuantityLimitedRef">Available</ng-container>
+              <ng-template #QuantityLimitedRef>Quantity is Limited</ng-template>
+            </div>
+            <button class="btn btn-danger" [disabled]="isQuantityZero(product)" (click)="addToCart(product)"
+              (click)="handleCart(product)"
+              [ngStyle]="{'background-color': product.quantity < 2 ? 'red' : 'green', 'color': 'white'}">Add To Cart<i
+                class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i></button>
+            <button class="btn btn-warning" (click)="prdDetails(product.id)">details</button>
+            <!-- [routerLink]="['/details', product.id]" -->
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="container fluid card-body" id="firePrd">
+      <div class="row card-body">
+        <ng-container *ngFor="let prd of prds">
+          <div class="col-6 mb-3 text-center pt-4 card-body" appprdCard
+            [ngClass]="{'bg-warning': prd.quantity < 2}">
+            <!-- <img [src]="prd.images[0]" alt="{{ prd.title }}" width="200"> -->
+            <img [src]="prd.images && prd.images.length > 0 ? prd.images[0] : ''" alt="{{ prd.title }}" width="200">
+
+            <h2>{{ prd.title | uppercase }}</h2>
+            <p>Price: {{ prd.price | currency:'EGP' }}</p>
+            <p>Quantity: {{ prd.quantity }}</p>
+            <ng-container [ngSwitch]="prd.quantity">
+              <ng-container *ngSwitchCase="1">Last one item</ng-container>
+              <ng-container *ngSwitchCase="2">Last two items</ng-container>
+              <ng-container *ngSwitchCase="0">Out of Stock</ng-container>
+              <ng-container *ngSwitchDefault>In Stock</ng-container>
+            </ng-container>
+            <div>
+              <ng-container *ngIf="prd.quantity > 2 ; else QuantityLimitedRef">Available</ng-container>
+              <ng-template #QuantityLimitedRef>Quantity is Limited</ng-template>
+            </div>
+            <button class="btn btn-danger" [disabled]="prd.quantity==0"
+              [ngStyle]="{'background-color': prd.quantity < 2 ? 'red' : 'green', 'color': 'white'}">Add To Cart<i
+                class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i></button>
+            <button class="btn btn-warning">details</button>
+            <!-- [routerLink]="['/details', product.id]" -->
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
