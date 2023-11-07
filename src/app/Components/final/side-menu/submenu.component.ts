@@ -25,9 +25,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     </span>
   </a>
   <div *ngIf="item.items && item.items.length > 0 ">
-    <app-submenu [data]="item" [collapsed]="collapsed" [expanded]="item.expanded" [multiple]="multiple">
-    </app-submenu>
-  </div>
+  <app-submenu [data]="item" [collapsed]="collapsed" [expanded]="item.expanded" [multiple]="multiple">
+  </app-submenu>
+</div>
+
 </li>
 </ul>
 
@@ -52,7 +53,7 @@ export class SubmenuComponent implements OnInit {
     routeLink: '',
     label: '',
     icon: '',
-    items: []
+    items: [],
   };
   @Input() collapsed = false;
   @Input() animating: boolean | undefined;
@@ -66,20 +67,22 @@ export class SubmenuComponent implements OnInit {
     console.log('multiple:', this.multiple);
   }
 
-  handleClick(event: any): void {
+  handleClick(item: InavbarData): void {
     console.log('SubmenuComponent handleClick called');
+
     if (!this.multiple) {
       if (this.data.items && this.data.items.length > 0) {
-        for (let item of this.data.items) {
-          console.log('SubmenuComponent item.expanded:', item.expanded);
-          if (item.expanded && this.expanded) {
-            item.expanded = false;
-            console.log('SubmenuComponent item.expanded set to false');
+        for (let subItem of this.data.items) {
+          if (subItem.expanded && subItem !== item) {
+            subItem.expanded = false;
+            console.log('SubmenuComponent subItem.expanded set to false');
           }
         }
       }
     }
-    this.expanded = !this.expanded;
-    console.log('SubmenuComponent expanded state:', this.expanded);
+
+    item.expanded = !item.expanded;
+    console.log('SubmenuComponent item.expanded state:', item.expanded);
   }
+
 }
