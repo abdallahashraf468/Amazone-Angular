@@ -1,3 +1,21 @@
-h1{
+h1 {
   color: #495057
- }
+}
+
+.vew-profile {
+  margin-top: 1rem;
+
+  button {
+    cursor: pointer;
+    border: none;
+    outline: 0;
+    color: #fff;
+    background-color: #556ee6;
+    padding: 12px 17px;
+    border-radius: 5px;
+
+    .fa-arrow-right {
+      margin-left: 10px;
+    }
+  }
+}
