@@ -42,7 +42,6 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { DeletedComponent } from './deleted/deleted.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -83,7 +82,6 @@ const firebaseConfig = {
     BodyComponent,
     SubmenuComponent,
     HeaderComponent,
-    DeletedComponent,
   ],
   imports: [
     BrowserModule,
