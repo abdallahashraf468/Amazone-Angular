@@ -36,6 +36,7 @@ import { SubmenuComponent } from './Components/final/side-menu/submenu.component
 import { HeaderComponent } from './Components/header/header.component';
 import {OverlayModule } from '@angular/cdk/overlay';
 import {CdkMenuModule } from '@angular/cdk/menu';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
@@ -91,6 +92,7 @@ const firebaseConfig = {
     provideFirestore(() => getFirestore()),
     OverlayModule,
     CdkMenuModule,
+    CanvasJSAngularChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
