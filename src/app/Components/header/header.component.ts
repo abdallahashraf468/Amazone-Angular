@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { languages, notifications, userItem } from './header-dummy-data';
 
 @Component({
   selector: 'app-header',
@@ -14,19 +15,25 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
+    this.selectedLanguage = this.languages[0];
   }
 
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 
   canShowSearchAsOverlay = false;
+  selectedLanguage : any;
+
+  languages = languages;
+  notifications = notifications;
+  userItem = userItem;
 
 
   getHeadClass(): string {
     let styleClass = '';
     if(this.collapsed && this.screenWidth > 768){
       styleClass = 'head-trimmed';
-    }else {
+    }else if (this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
       styleClass = 'head-m-screen';
     }
     return styleClass;
