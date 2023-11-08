@@ -40,6 +40,8 @@ import {CdkMenuModule } from '@angular/cdk/menu';
 
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
   authDomain: "fir-88026.firebaseapp.com",
@@ -89,6 +91,7 @@ const firebaseConfig = {
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     OverlayModule,
     CdkMenuModule,
   ],
