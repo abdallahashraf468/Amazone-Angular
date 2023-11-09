@@ -42,6 +42,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -82,6 +83,7 @@ const firebaseConfig = {
     BodyComponent,
     SubmenuComponent,
     HeaderComponent,
+    ProductUploadFormComponent,
   ],
   imports: [
     BrowserModule,
