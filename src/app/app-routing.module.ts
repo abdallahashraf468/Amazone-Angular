@@ -18,6 +18,7 @@ import { StatisticsComponent } from './Components/final/statistics/statistics.co
 import { CoupensComponent } from './Components/final/coupens/coupens.component';
 import { SettingsComponent } from './Components/final/settings/settings.component';
 import { MediaComponent } from './Components/final/media/media.component';
+import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
 
 const routes: Routes = [
   // { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -37,6 +38,8 @@ const routes: Routes = [
     path: "products",
     loadChildren: () => import('./Components/products/products.module').then(m => m.ProductsModule),
   },
+  {path : 'product-upload-form', component: ProductUploadFormComponent, title: "product-upload-form"},
+
   // { path: "parent", component: ParentCComponent, title: "products-parent Page", canActivate: [userGuard] },
   // { path: "category", component: CategoryComponent, title: "category Page", canActivate: [userGuard] },
   // { path: "about", component: AboutComponent, title: "About-Us Page" },

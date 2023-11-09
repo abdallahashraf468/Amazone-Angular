@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { languages, notifications, userItem } from './header-dummy-data';
 
@@ -7,6 +8,7 @@ import { languages, notifications, userItem } from './header-dummy-data';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  constructor( private Router: Router) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -37,6 +39,9 @@ export class HeaderComponent implements OnInit {
       styleClass = 'head-m-screen';
     }
     return styleClass;
+  }
+  goToForm(){
+    this.Router.navigate(['/product-upload-form']);
   }
 
   checkCanShowSearchAsOverlay(innerWidth: number):void{

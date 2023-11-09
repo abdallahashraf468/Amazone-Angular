@@ -6,6 +6,8 @@
           <input type="search" placeholder="Search..." name="search" class="search">
           <i class="fa-solid fa-magnifying-glass search-icon "></i>
         </div>
+
+        
         <div *ngIf="canShowSearchAsOverlay" class="overlay-search">
           <button [cdkMenuTriggerFor]="searchOverLay" class="search-menu-btn ripple">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -13,6 +15,7 @@
         </div>
       </div>
     </div>
+    <button class="btn btn-primary ms-5 my-2" (click)="goToForm()">Add Product</button>
     <div class="head-content-right">
       <div class="head-menu">
         <div class="head-menu-item">
@@ -55,6 +58,7 @@
     </button>
   </div>
 </ng-template>
+
 
 <ng-template #languageOverlay>
   <div class="overlay overlay-language overlay-fall" cdkMenu>
