@@ -13,24 +13,26 @@ import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
-  
+
 })
 export class ProductsComponent implements OnInit {
   private readonly storage: Storage = inject(Storage);
   store: Store = new Store("Products", ["tables", "chairs", "tv"], "assets/img/logo2.png");
-  // ProductsList: Iproduct[];
   selectedCategory: number = 0;
-  filterProductsList: Iproduct[] = [];
   date = new Date();
   prds:IfireBseProduct[]=[];
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
-
+  //////////////////////////////////////
 
   constructor(private prdService: ProductsService, private router: Router, private productsApiService: ProductsApiService,
     private fireBase:FirebasePrdService) {
-      
+      this.fireBase.onFilterChange.subscribe(() => {
+        this.getProducts();
+      });
+
+
       this.prdToAdd = {
         brand: {
           name: '',
@@ -100,7 +102,7 @@ export class ProductsComponent implements OnInit {
     this.fireBase.addProduct(this.prdToAdd);
     this.getProducts();
   }
-    
+
 //   onImageCoverSelected(event: any) {
 //     if (!event.files) return
 
@@ -121,62 +123,26 @@ export class ProductsComponent implements OnInit {
   //     this.coverImageFileName = inputElement.files[0].name;
   //   }
   // }
-  
+
   onImagesSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files?.length) {
       this.prodductImageFileName = inputElement.files[0].name;
     }
   }
-  
+
 
   ngOnInit(): void {
-    this.filterProductsList = this.prdService.ProductsList;
     this.getProducts();
   }
 
+
+
+
+
+
+
   
-
-  @Output() onaddNewPrd: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
-
-  //select
-  optionList = ["1", "2", "3"]
-  filterPrds() {
-    if (this.selectedCategory == 0) {
-      this.filterProductsList = this.prdService.ProductsList;
-    } else {
-      this.filterProductsList = this.prdService.ProductsList.filter(prd => prd.categoryID == this.selectedCategory);
-    }
-  }
-  // search by name
-  @Input() set filterName(name: string) {
-    // console.log(name);
-    // this.filterProductsList = this.performSearch(name);
-    // console.log(this.filterProductsList);
-    this.filterProductsList = this.prdService.performSearch(name)
-  }
-  // performSearch(filterName: string): Iproduct[] {
-  //   filterName = filterName.toLowerCase();
-  //   return this.prdService.ProductsList.filter((prd: Iproduct) => prd.name.toLowerCase().includes(filterName));
-  // }
-
-  // search by price
-  @Input() set listFilter(value: number) {
-    this.filterProductsList = this.performFilter(value);
-    //  console.log(this.productsListFilter);
-  }
-  performFilter(filterValue: number): Iproduct[] {
-    console.log('FilterValue:', filterValue);
-    const filteredProducts = this.prdService.ProductsList.filter((prd: Iproduct) => prd.price >= filterValue);
-    console.log('Filtered Products:', filteredProducts);
-    return filteredProducts;
-  }
-
-
-  prdDetails(prdID: number) {
-    this.router.navigate(['/details', prdID]);
-  }
-
 
 
 }

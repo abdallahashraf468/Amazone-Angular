@@ -34,8 +34,8 @@ import { SettingsComponent } from './Components/final/settings/settings.componen
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
-import {OverlayModule } from '@angular/cdk/overlay';
-import {CdkMenuModule } from '@angular/cdk/menu';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 
@@ -43,6 +43,8 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
+import { MatTableModule } from '@angular/material/table';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -98,6 +100,7 @@ const firebaseConfig = {
     OverlayModule,
     CdkMenuModule,
     CanvasJSAngularChartsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

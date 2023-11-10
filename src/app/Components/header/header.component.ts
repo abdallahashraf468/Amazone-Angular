@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { languages, notifications, userItem } from './header-dummy-data';
+import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { languages, notifications, userItem } from './header-dummy-data';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor( private Router: Router) { }
+  constructor( private Router: Router,  private productService:FirebasePrdService ) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -50,6 +51,11 @@ export class HeaderComponent implements OnInit {
     }else {
       this.canShowSearchAsOverlay = false;
     }
+  }
+
+  set listFilter (value: string){
+    this.productService.PerformSearch(value);
+    this.productService.filterProducts(value);
   }
 
 }
