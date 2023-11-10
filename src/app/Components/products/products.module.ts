@@ -9,7 +9,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 
 @NgModule({
   declarations: [
-    ProductsComponent,
+    // ProductsComponent,
     ProductsListComponent,
   ],
   imports: [

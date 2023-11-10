@@ -88,6 +88,7 @@ const firebaseConfig = {
     ProductUploadFormComponent,
   ],
   imports: [
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
