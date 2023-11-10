@@ -1,15 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output ,inject} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output ,inject, AfterViewInit, ViewChild} from '@angular/core';
 import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { Iproduct } from 'src/app/Models/iproduct';
-import { Store } from 'src/app/Models/store';
-import { ProductsService } from 'src/app/Services/products.service';
-import { ProductsApiService } from './../../Services/products-api.service';
 import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { IfirebaseUsers } from 'src/app/Models/ifirebase-users';
+import { MatPaginator } from '@angular/material/paginator';
+import { DocumentData } from '@angular/fire/firestore';
 
 
 
@@ -17,40 +15,26 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule],
-
 })
 export class ProductsComponent implements OnInit {
   
   private readonly storage: Storage = inject(Storage);
-  store: Store = new Store("Products", ["tables", "chairs", "tv"], "assets/img/logo2.png");
-  selectedCategory: number = 0;
+  displayedColumns: string[] = ['_id','imageCover', 'title', 'description', 'price', 'quantity'];
+  clickedRows = new Set<IfireBseProduct>();
+  dataSource: MatTableDataSource<IfireBseProduct> = new MatTableDataSource<IfireBseProduct>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   date = new Date();
   prds:IfireBseProduct[]=[];
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(this.prds);
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  
-    // Call filterProducts to update the data based on the filter value
-    this.fireBase.filterProducts(filterValue);
-  }
   
   //////////////////////////////////////
 
-  constructor(private prdService: ProductsService, private router: Router, private productsApiService: ProductsApiService,
+  constructor(private router: Router,
     private fireBase:FirebasePrdService) {
-      this.fireBase.onFilterChange.subscribe(() => {
-        this.getProducts();
-      });
-
-
+    
       this.prdToAdd = {
         brand: {
           name: '',
@@ -83,39 +67,87 @@ export class ProductsComponent implements OnInit {
       };
   }
 
+  // getProducts(){
+  //   this.fireBase.getProducts().subscribe({
+  //     next: (products: (DocumentData | (DocumentData & { id: string; }))[]) => {
+  //       console.log(products);
+  //       // Map Firestore documents to IfireBseProduct interface
+  //       this.prds = products.map((productData: any) => {
+  //         return {
+  //           brand: productData.brand,
+  //           category: productData.category,
+  //           createdAt: productData.createdAt,
+  //           description: productData.description,
+  //           id: productData.id,
+  //           imageCover: productData.imageCover,
+  //           images: productData.images,
+  //           price: productData.price,
+  //           priceAfterDiscount: productData.priceAfterDiscount,
+  //           quantity: productData.quantity,
+  //           ratingsAverage: productData.ratingsAverage,
+  //           ratingsQuantity: productData.ratingsQuantity,
+  //           slug: productData.slug,
+  //           sold: productData.sold,
+  //           subcategory: productData.subcategory,
+  //           title: productData.title,
+  //           updatedAt: productData.updatedAt,
+  //           _id: productData._id
+  //         };
+  //       });
+  //       this.dataSource = new MatTableDataSource(this.prds);
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
   getProducts(){
     this.fireBase.getProducts().subscribe({
-      next: (data) => {
-        console.log(data);
-        // Map Firestore documents to IfireBseProduct interface
-        this.prds = data.map((documentData: any) => {
-          return {
-            brand: documentData.brand,
-            category: documentData.category,
-            createdAt: documentData.createdAt,
-            description: documentData.description,
-            id: documentData.id,
-            imageCover: documentData.imageCover,
-            images: documentData.images,
-            price: documentData.price,
-            priceAfterDiscount: documentData.priceAfterDiscount,
-            quantity: documentData.quantity,
-            ratingsAverage: documentData.ratingsAverage,
-            ratingsQuantity: documentData.ratingsQuantity,
-            slug: documentData.slug,
-            sold: documentData.sold,
-            subcategory: documentData.subcategory,
-            title: documentData.title,
-            updatedAt: documentData.updatedAt,
-            _id: documentData._id
-          };
-        });
-        this.dataSource = new MatTableDataSource(this.prds);
+      next: (products: (DocumentData | (DocumentData & { id: string; }))[]) => {
+        const mappedProducts:IfireBseProduct[]=products.map((productData)=>{
+          if('id' in productData){
+            const {id,...rest}=productData;
+            console.log(productData);
+            
+            return {_id:id,...rest} as IfireBseProduct;
+          }
+          return productData as IfireBseProduct;
+        })
+        this.dataSource.data = mappedProducts;
       },
       error: (err) => {
         console.log(err);
-      }
+        alert(`something went wrong ${err.message}`)
+      },
+      complete: () => {
+        console.log('products fetching completed.');
+      },
     });
+  }
+  onRowClick(row: IfireBseProduct): void {
+    if (this.clickedRows.has(row)) {
+      this.clickedRows.delete(row);
+    } else {
+      this.clickedRows.add(row);
+    }
+  }
+
+  isRowClicked(row: IfireBseProduct): boolean {
+    return this.clickedRows.has(row);
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   addProduct(){
     this.fireBase.addProduct(this.prdToAdd);
