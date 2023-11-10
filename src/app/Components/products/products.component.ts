@@ -18,9 +18,7 @@ import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
 export class ProductsComponent implements OnInit {
   private readonly storage: Storage = inject(Storage);
   store: Store = new Store("Products", ["tables", "chairs", "tv"], "assets/img/logo2.png");
-  // ProductsList: Iproduct[];
   selectedCategory: number = 0;
-  filterProductsList: Iproduct[] = [];
   date = new Date();
   prds:IfireBseProduct[]=[];
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
@@ -135,49 +133,16 @@ export class ProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.filterProductsList = this.prdService.ProductsList;
     this.getProducts();
   }
 
 
 
-  @Output() onaddNewPrd: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
 
-  //select
-  optionList = ["1", "2", "3"]
-  filterPrds() {
-    if (this.selectedCategory == 0) {
-      this.filterProductsList = this.prdService.ProductsList;
-    } else {
-      this.filterProductsList = this.prdService.ProductsList.filter(prd => prd.categoryID == this.selectedCategory);
-    }
-  }
-  // search by name
-  @Input() set filterName(name: string) {
-    // console.log(name);
-    // this.filterProductsList = this.performSearch(name);
-    // console.log(this.filterProductsList);
-    this.filterProductsList = this.prdService.performSearch(name)
-  }
-  // performSearch(filterName: string): Iproduct[] {
-  //   filterName = filterName.toLowerCase();
-  //   return this.prdService.ProductsList.filter((prd: Iproduct) => prd.name.toLowerCase().includes(filterName));
-  // }
 
-  // search by price
-  @Input() set listFilter(value: number) {
-    this.filterProductsList = this.performFilter(value);
-    //  console.log(this.productsListFilter);
-  }
-  performFilter(filterValue: number): Iproduct[] {
-    console.log('FilterValue:', filterValue);
-    const filteredProducts = this.prdService.ProductsList.filter((prd: Iproduct) => prd.price >= filterValue);
-    console.log('Filtered Products:', filteredProducts);
-    return filteredProducts;
-  }
 
-  prdDetails(prdID: number) {
-    this.router.navigate(['/details', prdID]);
-  }
+
+  
+
 
 }
