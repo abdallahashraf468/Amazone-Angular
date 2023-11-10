@@ -51,6 +51,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DialogComponent } from './Components/header/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const firebaseConfig = {
@@ -115,6 +117,8 @@ const firebaseConfig = {
     MatFormFieldModule,
     MatDialogModule,
     MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

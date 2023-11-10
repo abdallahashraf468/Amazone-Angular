@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { languages, notifications, userItem } from './header-dummy-data';
 import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
 import { DialogComponent } from './dialog/dialog.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 
 @Component({
@@ -13,6 +13,7 @@ import { DialogComponent } from './dialog/dialog.component';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('menuTrigger')  menuTrigger!: MatMenuTrigger;
   constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog ) { }
 
   openDialog() {
@@ -21,6 +22,11 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  openDialog2() {
+    const dialogRef = this.dialog.open(DialogComponent, {restoreFocus: false});
+    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
   }
 
   @HostListener('window:resize', ['$event'])

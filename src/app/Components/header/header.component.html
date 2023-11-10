@@ -34,7 +34,10 @@
           </button>
         </div>
         <div class="head-menu-item">
-          <button class="head-menu-item-btn ripple">
+          <button class="head-menu-item-btn ripple" mat-button [matMenuTriggerFor]="menu" #menuTrigger>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openDialog2()">Open dialog</button>
+            </mat-menu>
             <i class="far fa-comment-alt menu-icon"></i>
           </button>
         </div>
