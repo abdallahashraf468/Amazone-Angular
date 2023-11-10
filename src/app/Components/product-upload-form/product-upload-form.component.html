@@ -24,7 +24,7 @@
       <div class="col-md-12 mb-4">
         <!-- title    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="title">Title:</label>
+          <label class="form-label ms-3" for="title">Title:</label>
           <input
             type="text"
             id="title"
@@ -59,7 +59,7 @@
       <div class="col-md-12 mb-4">
         <!-- description    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="description"
+          <label class="form-label ms-3" for="description"
             >Description:</label
           >
           <textarea
@@ -85,80 +85,27 @@
       </div>
 
       <div class="col-md-12 mb-4">
-        <!-- brand name    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="brandName"
-            >Brand Name:</label
-          >
-          <input
-            [ngClass]="{
-              'is-invalid':
-                (ProductBrandNameInput.dirty ||
-                  ProductBrandNameInput.touched) &&
-                !ProductBrandNameInput.valid
-            }"
-            type="text"
-            id="brandName"
-            name="brandName"
-            #ProductBrandNameInput="ngModel"
-            minlength="4"
-            pattern="^[A-Za-z0-9_\\-\\.\s]{1,255}$"
-            [(ngModel)]="prdToAdd.brand.name"
-            required
-            [ngClass]="{
-              'is-invalid':
-                (ProductBrandNameInput.dirty ||
-                  ProductBrandNameInput.touched) &&
-                !ProductBrandNameInput.valid
-            }"
-            class="form-control form-control-lg"
-          />
-          <span class="invalid-feedback">
-            <span *ngIf="ProductBrandNameInput.errors?.['required']"
-              >product brand name is required</span
-            >
-            <span *ngIf="ProductBrandNameInput.errors?.['minlength']"
-              >product brand name must be at least 4 chars</span
-            >
-          </span>
-        </div>
+          <label for="brandName" class="form-label ms-3 "></label>
+          <select class="form-select form-select-lg " aria-label="brandName selection">
+            <option value="" selected disabled> Brands</option>
+            <option *ngFor="let brand of brands" [value]="brand.name">{{brand.name}}</option>
+          </select>
+          </div>
       </div>
       <div class="col-md-12 mb-4">
-        <!-- brand slug    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="brandSlug"
-            >Brand Slug:</label
-          >
-          <input
-            [ngClass]="{
-              'is-invalid':
-                (ProductBrandSlugInput.dirty ||
-                  ProductBrandSlugInput.touched) &&
-                !ProductBrandSlugInput.valid
-            }"
-            type="text"
-            id="brandSlug"
-            name="brandSlug"
-            [(ngModel)]="prdToAdd.brand.slug"
-            required
-            #ProductBrandSlugInput="ngModel"
-            minlength="4"
-            class="form-control form-control-lg"
-          />
-          <span class="invalid-feedback">
-            <span *ngIf="ProductBrandSlugInput.errors?.['required']">
-              product brand slug is required
-            </span>
-            <span *ngIf="ProductBrandSlugInput.errors?.['minlength']">
-              product brand slug must be at least 4 chars
-            </span>
-          </span>
-        </div>
+          <label for="brandSlug" class="form-label ms-3 "></label>
+          <select class="form-select form-select-lg " aria-label="brandSlug selection">
+            <option value="" selected disabled> Brand Slug</option>
+            <option *ngFor="let brand of brands" [value]="brand.slug">{{brand.slug}}</option>
+          </select>
+          </div>
       </div>
       <div class="col-md-12 mb-4">
         <!-- brand image    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="brandImage"
+          <label class="form-label ms-3" for="brandImage"
             >Brand Image:</label
           >
           <input
@@ -186,7 +133,7 @@
       <div class="col-md-12 mb-4">
         <!-- price -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="price">Price:</label>
+          <label class="form-label ms-3" for="price">Price:</label>
           <input
             type="text"
             id="price"
@@ -218,7 +165,7 @@
       <div class="col-md-12 mb-4">
         <!-- price after discount -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="priceAfterDiscount"
+          <label class="form-label ms-3" for="priceAfterDiscount"
             >Price after discount:</label
           >
           <input
@@ -253,7 +200,7 @@
       <div class="col-md-12 mb-4">
         <!-- quantity -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="quantity">Quantity:</label>
+          <label class="form-label ms-3" for="quantity">Quantity:</label>
           <input
             type="text"
             id="quantity"
@@ -285,7 +232,7 @@
       <div class="col-md-12 mb-4">
         <!--image cover-->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="imageCover"
+          <label class="form-label ms-3" for="imageCover"
             >Image Cover:</label
           >
           <input
@@ -313,7 +260,7 @@
       <div class="col-md-12 mb-4">
         <!--images-->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="images">Images:</label>
+          <label class="form-label ms-3" for="images">Images:</label>
           <input
             [ngClass]="{
               'is-invalid':
@@ -336,18 +283,50 @@
           </span>
         </div>
       </div>
-      <!-- <div>
-          <label for="categoryName">Category Name:</label>
-          <input type="text" id="categoryName" name="categoryName" [(ngModel)]="prdToAdd.category.name" required class="form-control form-control-lg">
-        </div> -->
+      <div class="col-md-12 mb-4">
+        <div class="form-outline">
+          <label for="categories" class="form-label ms-3 "></label>
+          <select class="form-select form-select-lg " aria-label="categories selection">
+            <option selected disabled>Categories</option>
+            <option value="music">Music</option>
+            <option value="mobiles">Mobiles</option>
+            <option value="beauty&health">Beauty & Health</option>
+            <option value="women's-Fashion"> Womens's Fashion</option>
+            <option value="home">Home</option>
+            <option value="baby&toy"> Baby & Toy</option>
+            <option value="men's-Fashion">Men's Fashion</option>
+            <option value="electronics">Electronics</option>
+            <option value="superMarket">Super Market</option>
+            <option value="books">Books</option>
+          </select>
+          </div>
+      </div>
+      <div class="col-md-12 mb-4">
+        <div class="form-outline">
+          <label for="catSlug" class="form-label ms-3 "></label>
+          <select class="form-select form-select-lg " aria-label="categories selection">
+            <option selected disabled>Category slug</option>
+            <option value="music">music</option>
+            <option value="mobiles">mobiles</option>
+            <option value="beauty&health">beauty & health</option>
+            <option value="women's-Fashion"> womens's fashion</option>
+            <option value="home">home</option>
+            <option value="baby&toy"> baby & toy</option>
+            <option value="men's-Fashion">men's fashion</option>
+            <option value="electronics">electronics</option>
+            <option value="superMarket">super market</option>
+            <option value="books">books</option>
+          </select>
+          </div>
+      </div>
       <div class="col-md-12 mb-4">
         <!-- ratings average -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="ratingsAverage"
+          <label class="form-label ms-3" for="ratingsAverage"
             >Ratings Average:</label
           >
           <input
-            type="number"
+            type="text"
             id="ratingsAverage"
             name="ratingsAverage"
             #productRatingsAverageInput="ngModel"
@@ -378,11 +357,11 @@
       <div class="col-md-12 mb-4">
         <!-- ratings quantity -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="ratingsQuantity"
+          <label class="form-label ms-3" for="ratingsQuantity"
             >Ratings Quantity:</label
           >
           <input
-            type="number"
+            type="text"
             id="ratingsQuantity"
             name="ratingsQuantity"
             [(ngModel)]="prdToAdd.ratingsQuantity"
@@ -413,8 +392,8 @@
       <div class="col-md-12 mb-4">
         <!-- updateTime    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="updatedAt"
-            >Updated Time:</label
+          <label class="form-label ms-3" for="updatedAt"
+            >Update Time:</label
           >
           <input
             [ngClass]="{
@@ -441,7 +420,7 @@
       <div class="col-md-12 mb-4">
         <!-- createTime    -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="updatedAt"
+          <label class="form-label ms-3" for="updatedAt"
             >Create Time:</label
           >
           <input
@@ -469,9 +448,9 @@
       <div class="col-md-12 mb-4">
         <!-- sold -->
         <div class="form-outline">
-          <label class="form-label ms-3 ms-2" for="sold">Sold Quantity:</label>
+          <label class="form-label ms-3" for="sold">Sold Quantity:</label>
           <input
-            type="number"
+            type="text"
             id="sold"
             name="sold"
             [(ngModel)]="prdToAdd.sold"
@@ -498,13 +477,15 @@
         </div>
       </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary btn-lg my-3"
-        [disabled]="addProductForm.invalid"
-      >
-        Add Product
-      </button>
+      <div class="mt-4 pt-2 d-flex justify-content-center">
+        <button
+          [disabled]="addProductForm.invalid"
+          class="btn btn-primary btn-lg"
+          [attr.value]="isUpdate ? 'Update' : 'Add Product'"
+        >
+          {{ isUpdate ? "Update" : "Add Product" }}
+        </button>
+      </div>
     </div>
   </form>
 </div>
