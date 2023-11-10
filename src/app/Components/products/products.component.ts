@@ -13,7 +13,7 @@ import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
-  
+
 })
 export class ProductsComponent implements OnInit {
   private readonly storage: Storage = inject(Storage);
@@ -26,11 +26,15 @@ export class ProductsComponent implements OnInit {
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
-
+  //////////////////////////////////////
 
   constructor(private prdService: ProductsService, private router: Router, private productsApiService: ProductsApiService,
     private fireBase:FirebasePrdService) {
-      
+      this.fireBase.onFilterChange.subscribe(() => {
+        this.getProducts();
+      });
+
+
       this.prdToAdd = {
         brand: {
           name: '',
@@ -100,7 +104,7 @@ export class ProductsComponent implements OnInit {
     this.fireBase.addProduct(this.prdToAdd);
     this.getProducts();
   }
-    
+
 //   onImageCoverSelected(event: any) {
 //     if (!event.files) return
 
@@ -121,21 +125,21 @@ export class ProductsComponent implements OnInit {
   //     this.coverImageFileName = inputElement.files[0].name;
   //   }
   // }
-  
+
   onImagesSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files?.length) {
       this.prodductImageFileName = inputElement.files[0].name;
     }
   }
-  
+
 
   ngOnInit(): void {
     this.filterProductsList = this.prdService.ProductsList;
     this.getProducts();
   }
 
-  
+
 
   @Output() onaddNewPrd: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
 
@@ -172,11 +176,8 @@ export class ProductsComponent implements OnInit {
     return filteredProducts;
   }
 
-
   prdDetails(prdID: number) {
     this.router.navigate(['/details', prdID]);
   }
-
-
 
 }
