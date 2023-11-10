@@ -48,6 +48,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DialogComponent } from './Components/header/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 const firebaseConfig = {
@@ -90,6 +93,7 @@ const firebaseConfig = {
     SubmenuComponent,
     HeaderComponent,
     ProductUploadFormComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +113,8 @@ const firebaseConfig = {
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
