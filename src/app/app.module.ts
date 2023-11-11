@@ -56,7 +56,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
+import {MatSelectModule} from '@angular/material/select';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -100,6 +101,7 @@ const firebaseConfig = {
     ProductUploadFormComponent,
     DialogComponent,
     Dialog2Component,
+    UpdateProductFormComponent,
   ],
   imports: [
     MatTableModule,
@@ -126,6 +128,7 @@ const firebaseConfig = {
     MatIconModule,
     MatBadgeModule,
     MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,6 +14,13 @@ export class FirebasePrdService {
     const products = collection(this.fsObject, 'products');
     return collectionData(products, { idField: 'id' });
   }
+  getProductById(id: string) {
+    const product = doc(this.fsObject, 'products', id);
+    console.log(product);
+    
+    return getDoc(product);
+  }
+  
 
   addProduct(product: IfireBseProduct) {
     return addDoc(collection(this.fsObject, 'products'), product);
@@ -22,6 +29,7 @@ export class FirebasePrdService {
   updateProduct(product: IfireBseProduct) {
     const productObject = { ...product };
     const prdRef = doc(this.fsObject, 'products', product.id);
+    alert("Product Updated Successfully");
     return updateDoc(prdRef, productObject);
   }
 

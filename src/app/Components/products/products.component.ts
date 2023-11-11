@@ -7,6 +7,8 @@ import {MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { DocumentData } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateProductFormComponent } from '../update-product-form/update-product-form.component';
 
 
 
@@ -27,13 +29,15 @@ export class ProductsComponent implements OnInit {
   prds:IfireBseProduct[]=[];
   quantityAvalable:number=0;
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
+  isUpdate:boolean=false;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
   
   //////////////////////////////////////
 
   constructor(private router: Router,
-    private fireBase:FirebasePrdService) {
+    private fireBase:FirebasePrdService,
+    private _dialog:MatDialog) {
     
       this.prdToAdd = {
         brand: {
@@ -65,6 +69,10 @@ export class ProductsComponent implements OnInit {
         updatedAt: '',
         _id: ''
       };
+  }
+
+  openEditproductForm(){
+    this._dialog.open(UpdateProductFormComponent)
   }
 
   // getProducts(){
@@ -159,6 +167,11 @@ export class ProductsComponent implements OnInit {
     this.fireBase.addProduct(this.prdToAdd);
     this.getProducts();
   }
+  // updateProduct(product:IfireBseProduct){
+  //   this.isUpdate=!this.isUpdate;
+  //   this.fireBase.updateProduct(product);
+  //   this.getProducts();
+  // }
 
 //   onImageCoverSelected(event: any) {
 //     if (!event.files) return
@@ -186,12 +199,6 @@ export class ProductsComponent implements OnInit {
     if (inputElement.files?.length) {
       this.prodductImageFileName = inputElement.files[0].name;
     }
-  }
-  kak(){
-    console.log("update");
-  }
-  labla(){
-    console.log("delete");
   }
 
   ngOnInit(): void {

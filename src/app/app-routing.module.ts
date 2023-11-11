@@ -19,6 +19,7 @@ import { CoupensComponent } from './Components/final/coupens/coupens.component';
 import { SettingsComponent } from './Components/final/settings/settings.component';
 import { MediaComponent } from './Components/final/media/media.component';
 import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
+import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
 
 const routes: Routes = [
   // { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -31,7 +32,8 @@ const routes: Routes = [
   },
   { path: 'media', component: MediaComponent, title: "media" },
   { path: 'settings', component: SettingsComponent, title: "settings" },
-
+  { path: 'updateprd/:id', component: UpdateProductFormComponent, title: "update" },
+  
   // { path: "home", component: ParentCComponent, title: "Home Page" },
   // { path: "products", component: ProductsComponent, title: "products Page" },
   {
