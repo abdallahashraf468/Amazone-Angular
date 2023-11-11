@@ -19,7 +19,7 @@ import { DocumentData } from '@angular/fire/firestore';
 export class ProductsComponent implements OnInit {
   
   private readonly storage: Storage = inject(Storage);
-  displayedColumns: string[] = ['_id','imageCover', 'title', 'description', 'price', 'quantity'];
+  displayedColumns: string[] = ['_id','imageCover', 'title', 'description', 'price', 'quantity','update','delete'];
   clickedRows = new Set<IfireBseProduct>();
   dataSource: MatTableDataSource<IfireBseProduct> = new MatTableDataSource<IfireBseProduct>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
