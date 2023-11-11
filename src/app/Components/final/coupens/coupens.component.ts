@@ -29,7 +29,7 @@ export class CoupensComponent implements OnInit, AfterViewInit {
           if ('id' in userData) {
             const { id, ...rest } = userData;
             // console.log(userData);
-            
+
             return { _id: id, ...rest } as IfirebaseUsers;
           }
           return userData as IfirebaseUsers;
