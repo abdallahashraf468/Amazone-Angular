@@ -8,9 +8,23 @@ table {
   width: 100%;
 }
 
-#sproduct{
-  height: 150px;
+td, th {
+  width: 25%;
 }
+
+
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
 .gradient-custom {
   /* fallback for old browsers */
   background: #f093fb;
