@@ -16,7 +16,7 @@ import { DocumentData } from '@angular/fire/firestore';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  
+
   private readonly storage: Storage = inject(Storage);
   displayedColumns: string[] = ['_id','imageCover', 'title', 'price', 'quantity','inStock','update','delete'];
   clickedRows = new Set<IfireBseProduct>();
@@ -29,12 +29,12 @@ export class ProductsComponent implements OnInit {
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
-  
+
   //////////////////////////////////////
 
   constructor(private router: Router,
     private fireBase:FirebasePrdService) {
-    
+
       this.prdToAdd = {
         brand: {
           name: '',
@@ -66,7 +66,6 @@ export class ProductsComponent implements OnInit {
         _id: ''
       };
   }
-
   // getProducts(){
   //   this.fireBase.getProducts().subscribe({
   //     next: (products: (DocumentData | (DocumentData & { id: string; }))[]) => {
@@ -101,24 +100,25 @@ export class ProductsComponent implements OnInit {
   //     }
   //   });
   // }
+
   getProducts(){
     this.fireBase.getProducts().subscribe({
       next: (products: (DocumentData | (DocumentData & { id: string; }))[]) => {
         const mappedProducts:IfireBseProduct[]=products.map((productData)=>{
           if('id' in productData){
             const {id,...rest}=productData;
-            
+
             // console.log(rest['quantity']);
             this.quantityAvalable=rest['quantity'];
-            
+
             // console.log(productData);
-            
+
             return {_id:id,...rest} as IfireBseProduct;
           }
           return productData as IfireBseProduct;
         })
         // console.log('Mapped Products:', mappedProducts);
-        
+
         this.dataSource.data = mappedProducts;
       },
       error: (err) => {
