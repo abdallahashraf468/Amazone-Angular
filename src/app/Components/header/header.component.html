@@ -28,15 +28,15 @@
             <i class="fa-solid fa-expand menu-icon"></i>
           </button>
         </div>
-        <div class="head-menu-item">
+        <div class="head-menu-item demo-section">
           <button class="head-menu-item-btn ripple" [cdkMenuTriggerFor]="notificationOverlay">
-            <i class="far fa-bell menu-icon"></i>
+            <i class="far fa-bell menu-icon" mat-raised-button matBadge="3" matBadgeColor="warn" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()"></i>
           </button>
         </div>
         <div class="head-menu-item">
           <button class="head-menu-item-btn ripple" mat-button [matMenuTriggerFor]="menu" #menuTrigger>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="openDialog2()">Open dialog</button>
+              <button mat-menu-item (click)="openDialog2()">view messege</button>
             </mat-menu>
             <i class="far fa-comment-alt menu-icon"></i>
           </button>

@@ -15,6 +15,7 @@ export class CoupensComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['_id', 'createdAt', 'email', 'name'];
   dataSource: MatTableDataSource<IfirebaseUsers> = new MatTableDataSource<IfirebaseUsers>([]);
   clickedRows = new Set<IfirebaseUsers>();
+  date = new Date();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
