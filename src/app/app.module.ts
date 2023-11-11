@@ -53,6 +53,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 const firebaseConfig = {
@@ -96,6 +99,7 @@ const firebaseConfig = {
     HeaderComponent,
     ProductUploadFormComponent,
     DialogComponent,
+    Dialog2Component,
   ],
   imports: [
     BrowserModule,
@@ -119,6 +123,8 @@ const firebaseConfig = {
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
+    MatBadgeModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
