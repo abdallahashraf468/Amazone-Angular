@@ -359,3 +359,14 @@
   background-size: 100%;
   transition: background 0s;
 }
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.demo-section + .demo-section {
+  margin-top: 16px;
+}

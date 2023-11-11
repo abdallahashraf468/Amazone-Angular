@@ -5,6 +5,7 @@ import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Dialog2Component } from './dialog2/dialog2.component';
 
 
 @Component({
@@ -18,15 +19,19 @@ export class HeaderComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
   openDialog2() {
-    const dialogRef = this.dialog.open(DialogComponent, {restoreFocus: false});
+    const dialogRef = this.dialog.open(Dialog2Component, {restoreFocus: false});
     dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+  }
+
+  hidden = false;
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
   }
 
   @HostListener('window:resize', ['$event'])
