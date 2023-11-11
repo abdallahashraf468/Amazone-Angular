@@ -5,7 +5,6 @@ import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
 import {MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { IfirebaseUsers } from 'src/app/Models/ifirebase-users';
 import { MatPaginator } from '@angular/material/paginator';
 import { DocumentData } from '@angular/fire/firestore';
 
@@ -19,13 +18,14 @@ import { DocumentData } from '@angular/fire/firestore';
 export class ProductsComponent implements OnInit {
   
   private readonly storage: Storage = inject(Storage);
-  displayedColumns: string[] = ['_id','imageCover', 'title', 'description', 'price', 'quantity','update','delete'];
+  displayedColumns: string[] = ['_id','imageCover', 'title', 'price', 'quantity','inStock','update','delete'];
   clickedRows = new Set<IfireBseProduct>();
   dataSource: MatTableDataSource<IfireBseProduct> = new MatTableDataSource<IfireBseProduct>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   date = new Date();
   prds:IfireBseProduct[]=[];
+  quantityAvalable:number=0;
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
@@ -107,12 +107,18 @@ export class ProductsComponent implements OnInit {
         const mappedProducts:IfireBseProduct[]=products.map((productData)=>{
           if('id' in productData){
             const {id,...rest}=productData;
-            console.log(productData);
+            
+            // console.log(rest['quantity']);
+            this.quantityAvalable=rest['quantity'];
+            
+            // console.log(productData);
             
             return {_id:id,...rest} as IfireBseProduct;
           }
           return productData as IfireBseProduct;
         })
+        // console.log('Mapped Products:', mappedProducts);
+        
         this.dataSource.data = mappedProducts;
       },
       error: (err) => {
@@ -180,6 +186,12 @@ export class ProductsComponent implements OnInit {
     if (inputElement.files?.length) {
       this.prodductImageFileName = inputElement.files[0].name;
     }
+  }
+  kak(){
+    console.log("update");
+  }
+  labla(){
+    console.log("delete");
   }
 
   ngOnInit(): void {

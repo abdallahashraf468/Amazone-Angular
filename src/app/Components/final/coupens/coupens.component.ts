@@ -28,14 +28,14 @@ export class CoupensComponent implements OnInit, AfterViewInit {
         const mappedUsers: IfirebaseUsers[] = users.map((userData) => {
           if ('id' in userData) {
             const { id, ...rest } = userData;
-            console.log(userData);
+            // console.log(userData);
             
             return { _id: id, ...rest } as IfirebaseUsers;
           }
           return userData as IfirebaseUsers;
         });
 
-        console.log('Mapped Users:', mappedUsers);
+        // console.log('Mapped Users:', mappedUsers);
 
         this.dataSource.data = mappedUsers;
       },
