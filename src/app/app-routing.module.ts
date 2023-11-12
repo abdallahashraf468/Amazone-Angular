@@ -17,12 +17,9 @@ import { DashboardComponent } from './Components/final/dashboard/dashboard.compo
 import { StatisticsComponent } from './Components/final/statistics/statistics.component';
 import { MediaComponent } from './Components/final/media/media.component';
 import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
-<<<<<<< HEAD
 import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
-=======
 import { userGuard } from './Guard/user.guard';
 import { LoginComponent } from './login/login.component';
->>>>>>> 9735ea0479c437cf877b816b26a46f6df4aee800
 
 const routes: Routes = [
   // { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -39,17 +36,13 @@ const routes: Routes = [
     canActivate:[userGuard]
   },
   { path: 'media', component: MediaComponent, title: "media" },
-<<<<<<< HEAD
-  { path: 'settings', component: SettingsComponent, title: "settings" },
   { path: 'updateprd/:id', component: UpdateProductFormComponent, title: "update" },
   
-=======
   {
     path: 'settings',
     loadChildren: () => import('./Components/final/settings/settings.module').then(m => m.SettingsModule),
   },
 
->>>>>>> 9735ea0479c437cf877b816b26a46f6df4aee800
   // { path: "home", component: ParentCComponent, title: "Home Page" },
   // { path: "products", component: ProductsComponent, title: "products Page" },
   {

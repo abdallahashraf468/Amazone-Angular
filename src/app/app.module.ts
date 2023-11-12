@@ -55,16 +55,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-<<<<<<< HEAD
 import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-=======
 import { LoginComponent } from './login/login.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 
->>>>>>> 9735ea0479c437cf877b816b26a46f6df4aee800
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -107,11 +104,8 @@ const firebaseConfig = {
     ProductUploadFormComponent,
     DialogComponent,
     Dialog2Component,
-<<<<<<< HEAD
     UpdateProductFormComponent,
-=======
     LoginComponent,
->>>>>>> 9735ea0479c437cf877b816b26a46f6df4aee800
   ],
   imports: [
     MatTableModule,
@@ -138,13 +132,10 @@ const firebaseConfig = {
     MatIconModule,
     MatBadgeModule,
     MatProgressBarModule,
-<<<<<<< HEAD
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
-=======
     NgxSpinnerModule.forRoot({ type: 'square-jelly-box' })
->>>>>>> 9735ea0479c437cf877b816b26a46f6df4aee800
   ],
   providers: [],
   bootstrap: [AppComponent]
