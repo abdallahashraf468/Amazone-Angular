@@ -17,5 +17,4 @@ export class BodyComponent {
     }
     return styleClass;
   }
-
 }

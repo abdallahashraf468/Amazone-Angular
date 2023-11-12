@@ -12,8 +12,8 @@ import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 export class ProductUploadFormComponent {
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   prds:IfireBseProduct[]=[];
-  coverImageFileName: string = '';
-  prodductImageFileName: string = '';
+  brands: any[] = [];
+  isUpdate: boolean = false;
 
   
   private readonly storage: Storage = inject(Storage);
@@ -52,7 +52,7 @@ export class ProductUploadFormComponent {
   getProducts(){
     this.fireBase.getProducts().subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         // Map Firestore documents to IfireBseProduct interface
         this.prds = data.map((documentData: any) => {
           return {
@@ -82,12 +82,50 @@ export class ProductUploadFormComponent {
       }
     });
   }
+  getBrands(){
+    this.fireBase.getBrands().subscribe({
+      next: (data) => {
+    this.kak();
+        console.log(data);
+        
+        this.brands = data.map((documentData: any) => {
+          return {
+            name: documentData.name,
+            slug: documentData.slug,
+            image: documentData.image,
+            _id: documentData._id
+          };
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+  kak(){
+    this.fireBase.getUsers().subscribe({
+      next: (data) => {
+        console.log(data);
+        
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
   addProduct(){
     this.fireBase.addProduct(this.prdToAdd);
+    alert('Product Added Successfully');
+    this.router.navigate(['/products/level1.1']);
     this.getProducts();
+  }
+  updateProduct(){
+    this.fireBase.updateProduct(this.prdToAdd);
   }
   ngOnInit(): void {
     this.getProducts();
+    this.getBrands();
   }
   
   uploadFile(input: HTMLInputElement) {

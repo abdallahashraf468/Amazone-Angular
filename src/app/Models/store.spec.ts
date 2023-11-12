@@ -1,7 +1,4 @@
-import { Store } from './store';
+<<<<<<< HEAD
+=======
 
-describe('Store', () => {
-  it('should create an instance', () => {
-    expect(new Store()).toBeTruthy();
-  });
-});
+>>>>>>> fady-dashbord

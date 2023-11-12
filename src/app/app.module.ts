@@ -34,8 +34,8 @@ import { SettingsComponent } from './Components/final/settings/settings.componen
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
-import {OverlayModule } from '@angular/cdk/overlay';
-import {CdkMenuModule } from '@angular/cdk/menu';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 
@@ -43,6 +43,20 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DialogComponent } from './Components/header/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -84,8 +98,11 @@ const firebaseConfig = {
     SubmenuComponent,
     HeaderComponent,
     ProductUploadFormComponent,
+    DialogComponent,
+    Dialog2Component,
   ],
   imports: [
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -98,6 +115,17 @@ const firebaseConfig = {
     OverlayModule,
     CdkMenuModule,
     CanvasJSAngularChartsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatBadgeModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
