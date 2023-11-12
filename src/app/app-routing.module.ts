@@ -31,6 +31,10 @@ const routes: Routes = [
   },
   { path: 'media', component: MediaComponent, title: "media" },
   { path: 'settings', component: SettingsComponent, title: "settings" },
+  {
+    path: 'settings',
+    loadChildren: () => import('./Components/final/settings/settings.module').then(m => m.SettingsModule),
+  },
 
   // { path: "home", component: ParentCComponent, title: "Home Page" },
   // { path: "products", component: ProductsComponent, title: "products Page" },
