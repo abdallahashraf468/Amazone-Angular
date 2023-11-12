@@ -15,7 +15,7 @@ import { Dialog2Component } from './dialog2/dialog2.component';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('menuTrigger')  menuTrigger!: MatMenuTrigger;
-  constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog ) { }
+  constructor( private router: Router,  private productService:FirebasePrdService, public dialog: MatDialog ) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit {
     return styleClass;
   }
   goToForm(){
-    this.Router.navigate(['/product-upload-form']);
+    this.router.navigate(['/product-upload-form']);
   }
 
   checkCanShowSearchAsOverlay(innerWidth: number):void{
@@ -85,6 +85,21 @@ export class HeaderComponent implements OnInit {
     console.log('Selected language:', selectedLanguage.language);
     this.selectedLanguage = selectedLanguage;
   }
+
+  onUserItemClick(item: any) {
+    console.log('Item Clicked:', item);
+    if (item.lable === 'Profile') {
+      console.log('Navigating to /settings/profile');
+      this.router.navigate(['/settings/profile']);
+    }else if (item.lable === 'Logout') {
+      console.log('Logging out. Redirecting to login page.');
+      this.router.navigate(['/login']);
+    }
+  }
+
+
+
+
 
 
 }
