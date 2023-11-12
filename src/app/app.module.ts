@@ -56,6 +56,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { LoginComponent } from './login/login.component';
 
 
 const firebaseConfig = {
@@ -100,6 +101,7 @@ const firebaseConfig = {
     ProductUploadFormComponent,
     DialogComponent,
     Dialog2Component,
+    LoginComponent,
   ],
   imports: [
     MatTableModule,

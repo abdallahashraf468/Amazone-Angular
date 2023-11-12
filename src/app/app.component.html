@@ -1,6 +1,12 @@
+<ng-container *ngIf="showHeader">
 <app-header [collapsed]="isSidenav" [screenWidth]="screenWidth"></app-header>
+</ng-container>
 <!-- <app-navigation-bar></app-navigation-bar> -->
 <router-outlet></router-outlet>
 <!-- <app-footer></app-footer> -->
+
+<ng-container *ngIf="showHeader">
 <app-side-menu (onToggleSideNav)="onToggleSideNav($event)"></app-side-menu>
+</ng-container>
+
 <app-body [collapsed]="isSidenav" [screenWidth]="screenWidth"></app-body>
