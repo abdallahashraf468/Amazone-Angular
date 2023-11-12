@@ -58,6 +58,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDYcZV0eHYZ3lIQfZi--vZJgfYJeDaFx4",
@@ -129,6 +131,8 @@ const firebaseConfig = {
     MatBadgeModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

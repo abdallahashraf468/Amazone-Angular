@@ -28,10 +28,17 @@ export class FirebasePrdService {
 
   updateProduct(product: IfireBseProduct) {
     const productObject = { ...product };
-    const prdRef = doc(this.fsObject, 'products', product.id);
+    const prdRef = doc(this.fsObject, 'products', product._id);
     alert("Product Updated Successfully");
     return updateDoc(prdRef, productObject);
   }
+  async deleteProduct(_id: string) {
+    const prdRef = doc(this.fsObject, 'products', _id);
+    return deleteDoc(prdRef)
+      .then(() => console.log('Document successfully deleted!'))
+      .catch((error) => console.error('Error deleting document:', error));
+  }
+  
 
   getBrands() {
     const brands = collection(this.fsObject, 'brands');

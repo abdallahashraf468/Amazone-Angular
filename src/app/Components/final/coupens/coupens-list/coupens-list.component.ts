@@ -29,7 +29,7 @@ export class  CoupensListComponent implements OnInit, AfterViewInit {
           if ('id' in prdData) {
             const { id, ...rest } = prdData;
             // console.log(prdData);
-            return { _id: id, ...rest } as IfireBseProduct;
+            return { title: id, ...rest } as IfireBseProduct;
           }
           return prdData as IfireBseProduct;
         });

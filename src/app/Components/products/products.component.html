@@ -3,75 +3,98 @@
 
 <mat-form-field>
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="serach products" #input />
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="search amazon's products"
+    #input
+  />
 </mat-form-field>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-    
-    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <th class="text-center" mat-header-cell *matHeaderCellDef>{{ column }}</th>
-      <td mat-cell *matCellDef="let element" style="font-size: 1em;max-width:min-content;max-height: min-content;">
-        <!-- Handle specific properties and description width -->
-        <ng-container *ngIf="column !== 'description'">
-          {{ element[column] }}
-        </ng-container>
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row._id }}</td>
+    </ng-container>
 
-        <ng-container *ngIf="column === 'description'">
-          <p style="
-                max-lines: 2;
-                max-width: 300px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              ">
-            {{ element[column] }}
-          </p>
-        </ng-container>
-        <ng-container *ngIf="column === 'inStock'">
-          <div [ngSwitch]="quantityAvalable">
-            <div *ngSwitchCase="0">Out of Stock`</div>
-            <div *ngSwitchCase="1">only one left</div>
-            <div *ngSwitchCase="2">only two left</div>
-            <div *ngSwitchCase="3">only three left</div>
-            <div *ngSwitchDefault>in Stock </div>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="column === 'imageCover'">
-          <div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis">
-            <img [src]="element[column]" alt="Product Image" class="rounded img-fluid"
-              style="max-width: 100px; max-height: 100px" />
-          </div>
-        </ng-container>
-        <ng-container *ngIf="column === 'update'">
-          <button class="btn btn-primary btn-sm">
-            <mat-icon style="padding: 0%; margin: 0%; font-size: 1.5em;" aria-hidden="false"
-              aria-label="Example edit icon" fontIcon="edit"></mat-icon>Update
-          </button>
-        </ng-container>
-        <ng-container *ngIf="column === 'delete'">
-          <button class="btn btn-danger btn-sm" btn-sm >
-            <mat-icon style="padding: 0%; margin: 0%; font-size: 1.5em;" aria-hidden="false"
-              aria-label="Example delete icon" fontIcon="delete"></mat-icon>Delete
-          </button>
-        </ng-container>
+    <ng-container matColumnDef="imageCover">
+      <th mat-header-cell *matHeaderCellDef>Image</th>
+      <td mat-cell *matCellDef="let row">
+        <img
+          [src]="row.imageCover"
+          alt="Product Image"
+          style="max-height: 50px; max-width: 50px"
+        />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+      <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+      <td mat-cell *matCellDef="let row">{{ row.price }}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+      <td mat-cell *matCellDef="let row">{{ row.quantity }}</td>
+    </ng-container>
+    <ng-container matColumnDef="inStock">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>inStock</th>
+      <td mat-cell *matCellDef="let row">{{ row.inStock }}</td>
+    </ng-container>
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Update</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="btn btn-primary btn-sm" (click)="openEditproductForm(row)">
+          <mat-icon
+            style="padding: 0%; margin: 0%; font-size: 1.5em"
+            aria-hidden="false"
+            aria-label="Example edit icon"
+            fontIcon="edit"
+          ></mat-icon
+          >Update
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="btn btn-danger btn-sm" btn-sm (click)="deleteProduct(row._id)">
+          <mat-icon
+            style="padding: 0%; margin: 0%; font-size: 1.5em"
+            aria-hidden="false"
+            aria-label="Example delete icon"
+            fontIcon="delete"
+          ></mat-icon
+          >Delete
+        </button>
       </td>
     </ng-container>
 
-    <!-- Row shown when there is no matching data. -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [class.demo-row-is-clicked]="isRowClicked(row)"
+      (click)="onRowClick(row)"
+    ></tr>
+
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" [attr.colspan]="displayedColumns.length + 1">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        {{ dataSource.filter }}
+      <td class="mat-cell" colspan="4">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar> "{{
+          input.value
+        }}"
       </td>
     </tr>
-
-    <!-- Header row -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-    <!-- Data rows -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.demo-row-is-clicked]="isRowClicked(row)"
-      (click)="onRowClick(row)"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
   </mat-paginator>
 </div>

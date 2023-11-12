@@ -19,10 +19,10 @@ import { UpdateProductFormComponent } from '../update-product-form/update-produc
 })
 export class ProductsComponent implements OnInit {
 
-  private readonly storage: Storage = inject(Storage);
+  // private readonly storage: Storage = inject(Storage);
   displayedColumns: string[] = ['_id','imageCover', 'title', 'price', 'quantity','inStock','update','delete'];
-  clickedRows = new Set<IfireBseProduct>();
   dataSource: MatTableDataSource<IfireBseProduct> = new MatTableDataSource<IfireBseProduct>([]);
+  clickedRows = new Set<IfireBseProduct>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   date = new Date();
@@ -33,10 +33,11 @@ export class ProductsComponent implements OnInit {
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
 
-  //////////////////////////////////////
 
   constructor(private router: Router,
-    private fireBase:FirebasePrdService) {
+    private storage: Storage,
+    private FirebasePrdService:FirebasePrdService,
+    private _dialog:MatDialog) {
     
       this.prdToAdd = {
         brand: {
@@ -70,74 +71,54 @@ export class ProductsComponent implements OnInit {
       };
   }
 
-  openEditproductForm(){
-    this._dialog.open(UpdateProductFormComponent)
+  openEditproductForm(data:IfireBseProduct){
+    const dialogRef=this._dialog.open(UpdateProductFormComponent,{data})
+    dialogRef.afterClosed().subscribe({
+      next:(val)=>{
+        if(val){
+          this.getProducts();
+        }
+      }
+    })
   }
-
-  // getProducts(){
-  //   this.fireBase.getProducts().subscribe({
-  //     next: (products: (DocumentData | (DocumentData & { id: string; }))[]) => {
-  //       console.log(products);
-  //       // Map Firestore documents to IfireBseProduct interface
-  //       this.prds = products.map((productData: any) => {
-  //         return {
-  //           brand: productData.brand,
-  //           category: productData.category,
-  //           createdAt: productData.createdAt,
-  //           description: productData.description,
-  //           id: productData.id,
-  //           imageCover: productData.imageCover,
-  //           images: productData.images,
-  //           price: productData.price,
-  //           priceAfterDiscount: productData.priceAfterDiscount,
-  //           quantity: productData.quantity,
-  //           ratingsAverage: productData.ratingsAverage,
-  //           ratingsQuantity: productData.ratingsQuantity,
-  //           slug: productData.slug,
-  //           sold: productData.sold,
-  //           subcategory: productData.subcategory,
-  //           title: productData.title,
-  //           updatedAt: productData.updatedAt,
-  //           _id: productData._id
-  //         };
-  //       });
-  //       this.dataSource = new MatTableDataSource(this.prds);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
-
   getProducts(){
-    this.fireBase.getProducts().subscribe({
-      next: (products: (DocumentData | (DocumentData & { id: string; }))[]) => {
-        const mappedProducts:IfireBseProduct[]=products.map((productData)=>{
-          if('id' in productData){
-            const {id,...rest}=productData;
-
-            // console.log(rest['quantity']);
-            this.quantityAvalable=rest['quantity'];
-
-            // console.log(productData);
-
-            return {_id:id,...rest} as IfireBseProduct;
+    this.FirebasePrdService.getProducts().subscribe({
+      next: (product: (DocumentData | (DocumentData & { id: string; }))[]) => {
+        const products: IfireBseProduct[] = product.map((prdData) => {
+          if ('id' in prdData) {
+            const { id, ...rest } = prdData;
+            return { _id: id, ...rest } as IfireBseProduct;
           }
-          return productData as IfireBseProduct;
-        })
-        // console.log('Mapped Products:', mappedProducts);
+          return prdData as IfireBseProduct;
+        });
 
-        this.dataSource.data = mappedProducts;
+        console.log('Recieved Products:',  products);
+
+        this.dataSource.data =  products;
       },
       error: (err) => {
-        console.log(err);
-        alert(`something went wrong ${err.message}`)
+        console.log('Error fetching products:', err);
       },
       complete: () => {
         console.log('products fetching completed.');
       },
     });
   }
+  deleteProduct(id: string) {
+    console.log('Deleting product...');
+    console.log(id);
+    
+    this.FirebasePrdService.deleteProduct(id)
+      .then(() => {
+        console.log(`Product with ID ${id} deleted successfully.`);
+        this.getProducts();
+      })
+      .catch((error) => {
+        console.error(`Error deleting product with ID ${id}:`, error);
+      });
+  }
+  
+  
   onRowClick(row: IfireBseProduct): void {
     if (this.clickedRows.has(row)) {
       this.clickedRows.delete(row);
@@ -158,20 +139,17 @@ export class ProductsComponent implements OnInit {
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource.filter);
+    
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
   addProduct(){
-    this.fireBase.addProduct(this.prdToAdd);
+    this.FirebasePrdService.addProduct(this.prdToAdd);
     this.getProducts();
   }
-  // updateProduct(product:IfireBseProduct){
-  //   this.isUpdate=!this.isUpdate;
-  //   this.fireBase.updateProduct(product);
-  //   this.getProducts();
-  // }
 
 //   onImageCoverSelected(event: any) {
 //     if (!event.files) return

@@ -30,7 +30,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ]
 })
 export class ProductsModule { }
