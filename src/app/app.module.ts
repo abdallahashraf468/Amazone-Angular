@@ -30,7 +30,6 @@ import { StatisticsComponent } from './Components/final/statistics/statistics.co
 // import { SubproductsComponent } from './Components/final/subproducts/subproducts.component';
 import { PagesComponent } from './Components/final/pages/pages.component';
 import { MediaComponent } from './Components/final/media/media.component';
-import { SettingsComponent } from './Components/final/settings/settings.component';
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -94,7 +93,6 @@ const firebaseConfig = {
     // SubproductsComponent,
     PagesComponent,
     MediaComponent,
-    SettingsComponent,
     BodyComponent,
     SubmenuComponent,
     HeaderComponent,

@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog  , private UserAuthenService:UserAuthenServiceService) { }
 
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -93,6 +94,11 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  onLanguageClick(selectedLanguage: any) {
+    console.log('Selected language:', selectedLanguage.language);
+    this.selectedLanguage = selectedLanguage;
+  }
+
   onUserItemClick(item: any) {
     console.log('Item Clicked:', item);
     if (item.lable === 'Profile') {
@@ -106,4 +112,13 @@ export class HeaderComponent implements OnInit {
 
     }
   }
-}
+
+  }
+
+
+
+
+
+
+
+
