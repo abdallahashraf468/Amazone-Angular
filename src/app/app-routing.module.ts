@@ -15,8 +15,6 @@ import { DetailsComponent } from './Components/details/details.component';
 // import { UserRactiveFormComponent } from './Components/User/user-ractive-form/user-ractive-form.component';
 import { DashboardComponent } from './Components/final/dashboard/dashboard.component';
 import { StatisticsComponent } from './Components/final/statistics/statistics.component';
-import { CoupensComponent } from './Components/final/coupens/coupens.component';
-import { SettingsComponent } from './Components/final/settings/settings.component';
 import { MediaComponent } from './Components/final/media/media.component';
 import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
 
@@ -30,7 +28,6 @@ const routes: Routes = [
     loadChildren: () => import('./Components/final/coupens/coupens.module').then(m => m.CoupensModule),
   },
   { path: 'media', component: MediaComponent, title: "media" },
-  { path: 'settings', component: SettingsComponent, title: "settings" },
   {
     path: 'settings',
     loadChildren: () => import('./Components/final/settings/settings.module').then(m => m.SettingsModule),

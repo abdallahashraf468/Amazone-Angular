@@ -30,7 +30,6 @@ import { StatisticsComponent } from './Components/final/statistics/statistics.co
 // import { SubproductsComponent } from './Components/final/subproducts/subproducts.component';
 import { PagesComponent } from './Components/final/pages/pages.component';
 import { MediaComponent } from './Components/final/media/media.component';
-import { SettingsComponent } from './Components/final/settings/settings.component';
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -56,7 +55,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { CustomizeComponent } from './Components/final/settings/customize/customize.component';
 
 
 const firebaseConfig = {
@@ -94,14 +92,12 @@ const firebaseConfig = {
     // SubproductsComponent,
     PagesComponent,
     MediaComponent,
-    SettingsComponent,
     BodyComponent,
     SubmenuComponent,
     HeaderComponent,
     ProductUploadFormComponent,
     DialogComponent,
     Dialog2Component,
-    CustomizeComponent,
   ],
   imports: [
     MatTableModule,
