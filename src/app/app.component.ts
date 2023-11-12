@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -11,12 +12,12 @@ interface SideNavToggle {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
+export class AppComponent implements OnInit {
   title = 'Amazon';
 
   showHeader = true;
 
-  constructor(private  router:Router){
+  constructor(private  router:Router, private spinner: NgxSpinnerService){
     router.events.subscribe(
       (val) => {
         if(val instanceof NavigationEnd){
@@ -28,6 +29,14 @@ export class AppComponent  {
         }
       }
     )
+  }
+
+  ngOnInit() {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 3000);
   }
 
 

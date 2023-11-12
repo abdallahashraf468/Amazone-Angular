@@ -56,6 +56,7 @@ import { Dialog2Component } from './Components/header/dialog2/dialog2.component'
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { LoginComponent } from './login/login.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 const firebaseConfig = {
@@ -126,6 +127,7 @@ const firebaseConfig = {
     MatIconModule,
     MatBadgeModule,
     MatProgressBarModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-pulse' })
   ],
   providers: [],
   bootstrap: [AppComponent]
