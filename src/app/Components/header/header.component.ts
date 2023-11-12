@@ -81,4 +81,11 @@ export class HeaderComponent implements OnInit {
     this.productService.filterProducts(value);
   }
 
+  onLanguageClick(selectedLanguage: any) {
+    console.log('Selected language:', selectedLanguage.language);
+    this.selectedLanguage = selectedLanguage;
+  }
+
+
 }
+
