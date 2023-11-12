@@ -2,32 +2,21 @@ h1 {
   color: #495057
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.row .col-left {
+.col-left {
   width: 65%;
 }
 
-.row .col {
+.col {
   margin: 20px 0 0 20px;
   width: 35%;
 }
 
-.row-md {
-  display: flex;
-  flex-direction: column;
-}
-
-.row-md .col-left {
+.col-left {
   width: 100%;
 }
 
 .welcome-card {
   border-radius: 0.25rem;
-  max-width: 740px;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -68,7 +57,7 @@ h1 {
 
 .task-col {
   width: 100%;
-}
+}  
 .task {
   background: #fff;
   padding: 20px;
