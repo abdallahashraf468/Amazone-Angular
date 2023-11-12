@@ -34,10 +34,16 @@ export class FirebasePrdService {
   }
   async deleteProduct(_id: string) {
     const prdRef = doc(this.fsObject, 'products', _id);
-    return deleteDoc(prdRef)
-      .then(() => console.log('Document successfully deleted!'))
-      .catch((error) => console.error('Error deleting document:', error));
+  
+    try {
+      await deleteDoc(prdRef);
+      console.log('Document successfully deleted!');
+    } catch (error) {
+      console.error('Error deleting document:', error);
+      throw error; // Re-throw the error to propagate it further if needed
+    }
   }
+  
   
 
   getBrands() {

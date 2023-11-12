@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, Output ,inject, AfterViewInit, ViewChild} from '@angular/core';
 import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { Router } from '@angular/router';
@@ -32,7 +33,7 @@ export class ProductsComponent implements OnInit {
   isUpdate:boolean=false;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
-
+ 
 
   constructor(private router: Router,
     private storage: Storage,
@@ -117,7 +118,6 @@ export class ProductsComponent implements OnInit {
         console.error(`Error deleting product with ID ${id}:`, error);
       });
   }
-  
   
   onRowClick(row: IfireBseProduct): void {
     if (this.clickedRows.has(row)) {

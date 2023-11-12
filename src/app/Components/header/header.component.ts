@@ -6,6 +6,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Dialog2Component } from './dialog2/dialog2.component';
+import { UserAuthenServiceService } from 'src/app/Services/user-authen-service.service';
 
 
 @Component({
@@ -15,7 +16,10 @@ import { Dialog2Component } from './dialog2/dialog2.component';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('menuTrigger')  menuTrigger!: MatMenuTrigger;
-  constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog ) { }
+  user:boolean = true
+
+  constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog  , private UserAuthenService:UserAuthenServiceService) { }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
@@ -81,4 +85,40 @@ export class HeaderComponent implements OnInit {
     this.productService.filterProducts(value);
   }
 
-}
+
+  logOut(){
+    this.UserAuthenService.userLogout()
+    this.user = this.UserAuthenService.isUserLoggedInOrNot;
+
+
+  }
+
+
+  onLanguageClick(selectedLanguage: any) {
+    console.log('Selected language:', selectedLanguage.language);
+    this.selectedLanguage = selectedLanguage;
+  }
+
+  onUserItemClick(item: any) {
+    console.log('Item Clicked:', item);
+    if (item.lable === 'Profile') {
+      console.log('Navigating to /settings/profile');
+      this.Router.navigate(['/settings/profile']);
+    }else if (item.lable === 'Logout') {
+      console.log('Logging out. Redirecting to login page.');
+
+      this.Router.navigate(['/login']);
+      this.logOut()
+
+    }
+  }
+
+  }
+
+
+
+
+
+
+
+
