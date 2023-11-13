@@ -56,6 +56,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+/* --------------------------------------------------------- */
+
+import { BestSellerComponent } from './Components/best-seller/best-seller.component';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button'; // Import other necessary modules if required
+import { TagModule } from 'primeng/tag';
+/* --------------------------------------------------------- */
 
 
 const firebaseConfig = {
@@ -100,6 +107,7 @@ const firebaseConfig = {
     ProductUploadFormComponent,
     DialogComponent,
     Dialog2Component,
+    BestSellerComponent,
   ],
   imports: [
     MatTableModule,
@@ -126,6 +134,13 @@ const firebaseConfig = {
     MatIconModule,
     MatBadgeModule,
     MatProgressBarModule,
+/* --------------------------------------------------------- */
+
+    CarouselModule,
+    ButtonModule,
+    TagModule,
+/* --------------------------------------------------------- */
+
   ],
   providers: [],
   bootstrap: [AppComponent]

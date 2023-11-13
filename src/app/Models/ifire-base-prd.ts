@@ -27,5 +27,6 @@ export interface IfireBseProduct {
     title: string;
     updatedAt: string;
     _id: string;
+  //   percentageDiscountAfterDiscount: number;
+  // percentageDiscountOriginalPrice: number;
   }
-  
