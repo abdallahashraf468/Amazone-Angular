@@ -71,6 +71,7 @@ import { TagModule } from 'primeng/tag';
 import { AppComponent } from './app.component';
 /* --------------------------------------------------------- */
 import { ToastrModule } from 'ngx-toastr';
+import { UpdateUserFormComponent } from './Components/update-user-form/update-user-form.component';
 
 
 const firebaseConfig = {
@@ -117,6 +118,7 @@ const firebaseConfig = {
     DialogComponent,
     Dialog2Component,
     BestSellerComponent,
+    UpdateUserFormComponent,
   ],
   imports: [
     MatSelectModule,

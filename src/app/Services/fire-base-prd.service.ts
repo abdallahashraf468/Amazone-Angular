@@ -2,6 +2,7 @@ import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, 
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { IfireBseProduct } from '../Models/ifire-base-prd';
 import { Observable, map } from 'rxjs';
+import { IfirebaseUsers } from '../Models/ifirebase-users';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,33 @@ export class FirebasePrdService {
   getUsers() {
     const users = collection(this.fsObject, 'users');
     return collectionData(users, { idField: 'id' });
+  }
+
+  getUserById(id: string) {
+    const user = doc(this.fsObject, 'users', id);
+    return getDoc(user);
+  }
+
+  addUser(user: IfirebaseUsers) {
+    return addDoc(collection(this.fsObject, 'users'), user);
+  }
+
+  updateUser(user: IfirebaseUsers) {
+    const userObject = { ...user };
+    const userRef = doc(this.fsObject, 'users', user._id);
+    return updateDoc(userRef, userObject);
+  }
+
+  async deleteUser(_id: string) {
+    const userRef = doc(this.fsObject, 'users', _id);
+
+    try {
+      await deleteDoc(userRef);
+      console.log('User successfully deleted!');
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      throw error; // Re-throw the error to propagate it further if needed
+    }
   }
 
   //////////////////////////////////////////////////////////////
@@ -148,7 +176,7 @@ export class FirebasePrdService {
     );
   }
 
-  
+
   // ////////////////////////////////////////////////////////////////
 
   filterProducts(value: string): void {
