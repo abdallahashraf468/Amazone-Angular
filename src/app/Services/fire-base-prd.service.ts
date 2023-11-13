@@ -28,7 +28,7 @@ export class FirebasePrdService {
 
   updateProduct(product: IfireBseProduct) {
     const productObject = { ...product };
-    const prdRef = doc(this.fsObject, 'products', product._id);
+    const prdRef = doc(this.fsObject, 'products', product.id);
     alert("Product Updated Successfully");
     return updateDoc(prdRef, productObject);
   }

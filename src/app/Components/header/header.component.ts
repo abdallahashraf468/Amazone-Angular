@@ -68,9 +68,7 @@ export class HeaderComponent implements OnInit {
     }
     return styleClass;
   }
-  goToForm(){
-    this.Router.navigate(['/product-upload-form']);
-  }
+  
 
   checkCanShowSearchAsOverlay(innerWidth: number):void{
     if(innerWidth < 845){

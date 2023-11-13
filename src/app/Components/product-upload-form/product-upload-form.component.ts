@@ -47,7 +47,6 @@ export class ProductUploadFormComponent {
       subcategory: [],
       title: '',
       updatedAt: '',
-      _id: ''
     };
   }
   getProducts(){
@@ -124,9 +123,7 @@ export class ProductUploadFormComponent {
     this.router.navigate(['/products/level1.1']);
     this.getProducts();
   }
-  updateProduct(){
-    this.fireBase.updateProduct(this.prdToAdd);
-  }
+  
   ngOnInit(): void {
     this.getProducts();
     this.getBrands();

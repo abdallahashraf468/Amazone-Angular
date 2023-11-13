@@ -1,5 +1,14 @@
-<h1>Products</h1>
-<p>{{ date | date : "longDate" }}</p>
+<div class="container-fluid d-flex justify-content-between">
+  <div class="col col-sm-4">
+    <h1>Products</h1>
+    <p>{{ date | date : "longDate" }}</p>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" (click)="goToForm()">Add Product</button>
+    </div>
+  </div>
+</div>
 <div></div>
 <mat-form-field>
   <mat-label>Filter</mat-label>
@@ -13,9 +22,9 @@
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="_id">
+    <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let row">{{ row._id }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="imageCover">
@@ -48,7 +57,10 @@
     <ng-container matColumnDef="update">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Update</th>
       <td mat-cell *matCellDef="let row">
-        <button class="btn btn-primary btn-sm" (click)="openEditproductForm(row)">
+        <button
+          class="btn btn-primary btn-sm"
+          (click)="openEditproductForm(row)"
+        >
           <mat-icon
             style="padding: 0%; margin: 0%; font-size: 1.5em"
             aria-hidden="false"
@@ -62,7 +74,11 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
       <td mat-cell *matCellDef="let row">
-        <button class="btn btn-danger btn-sm" btn-sm (click)="deleteProduct(row._id)">
+        <button
+          class="btn btn-danger btn-sm"
+          btn-sm
+          (click)="deleteProduct(row._id)"
+        >
           <mat-icon
             style="padding: 0%; margin: 0%; font-size: 1.5em"
             aria-hidden="false"
