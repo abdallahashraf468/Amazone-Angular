@@ -17,10 +17,10 @@ export class FirebasePrdService {
   getProductById(id: string) {
     const product = doc(this.fsObject, 'products', id);
     console.log(product);
-    
+
     return getDoc(product);
   }
-  
+
 
   addProduct(product: IfireBseProduct) {
     return addDoc(collection(this.fsObject, 'products'), product);
@@ -34,7 +34,7 @@ export class FirebasePrdService {
   }
   async deleteProduct(_id: string) {
     const prdRef = doc(this.fsObject, 'products', _id);
-  
+
     try {
       await deleteDoc(prdRef);
       console.log('Document successfully deleted!');
@@ -43,8 +43,8 @@ export class FirebasePrdService {
       throw error; // Re-throw the error to propagate it further if needed
     }
   }
-  
-  
+
+
 
   getBrands() {
     const brands = collection(this.fsObject, 'brands');
@@ -99,7 +99,7 @@ export class FirebasePrdService {
             _id: documentData._id
           } as IfireBseProduct;
         });
-  
+
         this.onFilterChange.emit();
       },
       error: (err) => {
@@ -107,7 +107,7 @@ export class FirebasePrdService {
       }
     });
   }
-  
+
 
   PerformSearch(val: string): IfireBseProduct[] {
     val = val.toLowerCase();
