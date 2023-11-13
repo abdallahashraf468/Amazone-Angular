@@ -3,7 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { LoginComponent } from './login/login.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
+
+
 // import { HeaderComponent } from './Components/header/header.component';
 // import { ProductsComponent } from './Components/products/products.component';
 // import { FooterComponent } from './Components/footer/footer.component';
@@ -30,7 +37,6 @@ import { StatisticsComponent } from './Components/final/statistics/statistics.co
 // import { SubproductsComponent } from './Components/final/subproducts/subproducts.component';
 import { PagesComponent } from './Components/final/pages/pages.component';
 import { MediaComponent } from './Components/final/media/media.component';
-import { SettingsComponent } from './Components/final/settings/settings.component';
 import { BodyComponent } from './Components/final/body/body.component';
 import { SubmenuComponent } from './Components/final/side-menu/submenu.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -62,6 +68,7 @@ import { BestSellerComponent } from './Components/best-seller/best-seller.compon
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button'; // Import other necessary modules if required
 import { TagModule } from 'primeng/tag';
+import { AppComponent } from './app.component';
 /* --------------------------------------------------------- */
 
 
@@ -77,7 +84,9 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent,
+    UpdateProductFormComponent,
+    LoginComponent,
+    HeaderComponent,
     // ProductsComponent,
     // FooterComponent,
     SideMenuComponent,
@@ -100,7 +109,6 @@ const firebaseConfig = {
     // SubproductsComponent,
     PagesComponent,
     MediaComponent,
-    SettingsComponent,
     BodyComponent,
     SubmenuComponent,
     HeaderComponent,
@@ -110,6 +118,10 @@ const firebaseConfig = {
     BestSellerComponent,
   ],
   imports: [
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),
     MatTableModule,
     BrowserModule,
     AppRoutingModule,

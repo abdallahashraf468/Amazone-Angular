@@ -15,6 +15,13 @@ export class FirebasePrdService {
     const products = collection(this.fsObject, 'products');
     return collectionData(products, { idField: 'id' });
   }
+  getProductById(id: string) {
+    const product = doc(this.fsObject, 'products', id);
+    console.log(product);
+
+    return getDoc(product);
+  }
+
 
   addProduct(product: IfireBseProduct) {
     return addDoc(collection(this.fsObject, 'products'), product);
@@ -22,9 +29,23 @@ export class FirebasePrdService {
 
   updateProduct(product: IfireBseProduct) {
     const productObject = { ...product };
-    const prdRef = doc(this.fsObject, 'products', product.id);
+    const prdRef = doc(this.fsObject, 'products', product._id);
+    alert("Product Updated Successfully");
     return updateDoc(prdRef, productObject);
   }
+  async deleteProduct(_id: string) {
+    const prdRef = doc(this.fsObject, 'products', _id);
+
+    try {
+      await deleteDoc(prdRef);
+      console.log('Document successfully deleted!');
+    } catch (error) {
+      console.error('Error deleting document:', error);
+      throw error; // Re-throw the error to propagate it further if needed
+    }
+  }
+
+
 
   getBrands() {
     const brands = collection(this.fsObject, 'brands');

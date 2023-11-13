@@ -13,6 +13,7 @@ export class ProductUploadFormComponent {
   prdToAdd: IfireBseProduct = {} as IfireBseProduct;
   prds:IfireBseProduct[]=[];
   brands: any[] = [];
+  categories: any[] = [];
   isUpdate: boolean = false;
 
   
@@ -85,8 +86,7 @@ export class ProductUploadFormComponent {
   getBrands(){
     this.fireBase.getBrands().subscribe({
       next: (data) => {
-    this.kak();
-        console.log(data);
+        // console.log(data);
         
         this.brands = data.map((documentData: any) => {
           return {
@@ -102,17 +102,21 @@ export class ProductUploadFormComponent {
       }
     });
   }
-  kak(){
-    this.fireBase.getUsers().subscribe({
-      next: (data) => {
-        console.log(data);
-        
-      },
-      error: (err) => {
-        console.log(err);
+  getCtaegories(){
+    this.fireBase.getCtaegories().subscribe({
+      next:(data)=>{
+        this.categories=data.map((documentData:any)=>{
+          return{
+            name:documentData.name,
+            slug:documentData.slug,
+            image:documentData.image,
+            _id:documentData._id
+          }
+        })
       }
     })
-  }
+  };
+  
 
   addProduct(){
     this.fireBase.addProduct(this.prdToAdd);
@@ -126,6 +130,7 @@ export class ProductUploadFormComponent {
   ngOnInit(): void {
     this.getProducts();
     this.getBrands();
+    this.getCtaegories()
   }
   
   uploadFile(input: HTMLInputElement) {
