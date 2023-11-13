@@ -127,7 +127,7 @@ const firebaseConfig = {
     MatIconModule,
     MatBadgeModule,
     MatProgressBarModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-pulse' })
+    NgxSpinnerModule.forRoot({ type: 'square-jelly-box' })
   ],
   providers: [],
   bootstrap: [AppComponent]

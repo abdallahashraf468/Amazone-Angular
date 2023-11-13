@@ -27,7 +27,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css",
-              "node_modules/ngx-spinner/animations/ball-pulse.css"
+              "node_modules/ngx-spinner/animations/square-jelly-box.css"
             ],
             "scripts": []
           },
@@ -97,7 +97,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css",
-              "node_modules/ngx-spinner/animations/ball-pulse.css"
+              "node_modules/ngx-spinner/animations/square-jelly-box.css"
             ],
             "scripts": []
           }
