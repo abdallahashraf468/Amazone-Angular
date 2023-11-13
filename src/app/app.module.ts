@@ -70,6 +70,7 @@ import { ButtonModule } from 'primeng/button'; // Import other necessary modules
 import { TagModule } from 'primeng/tag';
 import { AppComponent } from './app.component';
 /* --------------------------------------------------------- */
+import { ToastrModule } from 'ngx-toastr';
 
 
 const firebaseConfig = {
@@ -152,6 +153,19 @@ const firebaseConfig = {
     ButtonModule,
     TagModule,
 /* --------------------------------------------------------- */
+ToastrModule.forRoot( {
+  timeOut:1100,
+  progressBar:true,
+  progressAnimation:'increasing',
+  positionClass: 'toast-top-center',
+  closeButton:true,
+  maxOpened:2,
+
+
+  preventDuplicates: true
+
+}),
+
 
   ],
   providers: [],

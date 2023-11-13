@@ -7,6 +7,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Dialog2Component } from './dialog2/dialog2.component';
 import { UserAuthenServiceService } from 'src/app/Services/user-authen-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('menuTrigger')  menuTrigger!: MatMenuTrigger;
   user:boolean = true
 
-  constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog  , private UserAuthenService:UserAuthenServiceService) { }
+  constructor(private Toster:ToastrService ,private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog  , private UserAuthenService:UserAuthenServiceService) { }
 
 
   openDialog() {
@@ -89,6 +90,7 @@ export class HeaderComponent implements OnInit {
   logOut(){
     this.UserAuthenService.userLogout()
     this.user = this.UserAuthenService.isUserLoggedInOrNot;
+    this.Toster.error("logOut", "logOut Success")
 
 
   }
