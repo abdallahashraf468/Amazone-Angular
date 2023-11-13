@@ -69,6 +69,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button'; // Import other necessary modules if required
 import { TagModule } from 'primeng/tag';
 import { AppComponent } from './app.component';
+import { DeletComponent } from './delet/delet.component';
 /* --------------------------------------------------------- */
 
 
@@ -116,6 +117,7 @@ const firebaseConfig = {
     DialogComponent,
     Dialog2Component,
     BestSellerComponent,
+    DeletComponent,
   ],
   imports: [
     MatSelectModule,
