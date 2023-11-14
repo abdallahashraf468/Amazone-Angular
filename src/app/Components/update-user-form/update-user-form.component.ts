@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 import { DocumentData } from '@angular/fire/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-update-user-form',
@@ -44,10 +45,10 @@ export class UpdateUserFormComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     const creationTime = new Date(this.data.user.createdAt);
-    this.userForm.patchValue(
-      {...this.data.user,
-      createdAt: creationTime,}
-    );
+    this.userForm.patchValue({
+      ...this.data.user,
+      createdAt: creationTime,
+    });
   }
 
   getUsers(): void {

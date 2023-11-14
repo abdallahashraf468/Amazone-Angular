@@ -22,22 +22,17 @@
       <div class="form-outline">
         <label class="form-label ms-3" for="name">name:</label>
         <input
-          type="text"
-          id="name"
-          name="name"
-          [(ngModel)]="userToAdd.name"
-          required
-          [ngClass]="{
-            'is-invalid':
-              (userNameInput.dirty || userNameInput.touched) &&
-              !userNameInput.valid
-          }"
-          #userNameInput="ngModel"
-          minlength="3"
-          pattern="^[a-zA-Z ]{1,}*$
-              "
-          class="form-control form-control-lg"
-        />
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="userToAdd.name"
+        required
+        minlength="3"
+        pattern="^[a-zA-Z]{3,15}$"
+        class="form-control form-control-lg"
+        #userNameInput="ngModel"
+      />
+      
         <span class="invalid-feedback">
           <span *ngIf="userNameInput.errors?.['required']"
             >user name is required</span
