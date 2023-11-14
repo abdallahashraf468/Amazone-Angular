@@ -81,7 +81,7 @@ export class FirebasePrdService {
 
   updateUser(user: IfirebaseUsers) {
     const userObject = { ...user };
-    const userRef = doc(this.fsObject, 'users', user._id);
+    const userRef = doc(this.fsObject, 'users', user.id);
     return updateDoc(userRef, userObject);
   }
 

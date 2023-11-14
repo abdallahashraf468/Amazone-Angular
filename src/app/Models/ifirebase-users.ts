@@ -1,5 +1,5 @@
 export interface IfirebaseUsers {
-  _id: string;
+  id: string;
   createdAt: string;
   email: string;
   name: string;

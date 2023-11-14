@@ -8,7 +8,7 @@
   >
     <div class="card-body p-4p -md-5">
       <h3>Add User</h3>
-      <div class="form-outline">
+      <!-- <div class="form-outline">
         <label class="form-label ms-3" for="id">user's ID:</label>
         <input
           type="text"
@@ -18,7 +18,7 @@
           [(ngModel)]="userToAdd._id"
           class="form-control form-control-lg"
         />
-      </div>
+      </div> -->
       <div class="form-outline">
         <label class="form-label ms-3" for="name">name:</label>
         <input
@@ -45,9 +45,9 @@
           <span *ngIf="userNameInput.errors?.['minlength']"
             >user name must be at least 3 chars</span
           >
-          <!-- <span *ngIf="userNameInput.errors?.['pattern']"
+          <span *ngIf="userNameInput.errors?.['pattern']"
             >user name mustn't has special chars</span
-          > -->
+          >
         </span>
       </div>
       <div class="form-outline">
@@ -76,27 +76,33 @@
           >
         </span>
       </div>
-      <div class="form-outline">
-        <label class="form-label ms-3" for="updatedAt">Created At:</label>
-        <input
-          [ngClass]="{
-            'is-invalid':
-              (userCreatedAtInput.dirty || userCreatedAtInput.touched) &&
-              !userCreatedAtInput.valid
-          }"
-          type="datetime-local"
-          id="createdAt"
-          name="createdAt"
-          #userCreatedAtInput="ngModel"
-          [(ngModel)]="userToAdd.createdAt"
-          required
-          class="form-control form-control-lg"
-        />
-        <span class="invalid-feedback">
-          <span *ngIf="userCreatedAtInput.errors?.['required']">
-            Create Time is required
+      <div class="col-md-12 mb-4">
+        <!-- createTime    -->
+        <div class="form-outline">
+          <label class="form-label ms-3" for="createdAt"
+            >Create Time:</label
+          >
+          <input
+            [ngClass]="{
+              'is-invalid':
+                (userCreatedAtInput.dirty ||
+                  userCreatedAtInput.touched) &&
+                !userCreatedAtInput.valid
+            }"
+            type="datetime-local"
+            id="createdAt"
+            name="createdAt"
+            #userCreatedAtInput="ngModel"
+            [(ngModel)]="userToAdd.createdAt"
+            required
+            class="form-control form-control-lg"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="userCreatedAtInput.errors?.['required']">
+              Create Time is required
+            </span>
           </span>
-        </span>
+        </div>
       </div>
       <div class="mt-4 pt-2 d-flex justify-content-center">
         <button

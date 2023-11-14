@@ -21,7 +21,7 @@
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row._id}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
@@ -55,7 +55,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
       <td mat-cell *matCellDef="let row">
-        <button class="btn btn-danger btn-sm" btn-sm (click)="deleteUser(row._id)">
+        <button class="btn btn-danger btn-sm" btn-sm (click)="deleteUser(row.id)">
           <mat-icon
             style="padding: 0%; margin: 0%; font-size: 1.5em"
             aria-hidden="false"

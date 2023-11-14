@@ -13,7 +13,7 @@ export class AddUserFormComponent {
   users: IfirebaseUsers[] = [];
   constructor(private fireBase: FirebasePrdService, private router: Router) {
     this.userToAdd = {
-      _id: '',
+      id: '',
       createdAt: '',
       email: '',
       name: '',

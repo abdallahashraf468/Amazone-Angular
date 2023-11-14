@@ -101,9 +101,9 @@
       <div class="col-md-12 mb-4">
         <div class="form-outline">
           <label for="brandName" class="form-label ms-3 ">Brand</label>
-          <select class="form-select form-select-lg " aria-label="brandName selection"  [(ngModel)]="prdToAdd.brand._id" [(ngModel)]="prdToAdd.brand.name"  name="brandName">
+          <select class="form-select form-select-lg " aria-label="brandName selection" [(ngModel)]="prdToAdd.brand.name" name="brandName">
             <option value="brandName" selected disabled> Brands</option>
-            <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
+            <option *ngFor="let brand of brands" [value]="brand.name">{{brand.name}}</option>
           </select>
           </div>
       </div>
@@ -301,9 +301,9 @@
       <div class="col-md-12 mb-4">
         <div class="form-outline">
           <label for="categories" class="form-label ms-3 "></label>
-          <select id="category" name="category" [(ngModel)]="prdToAdd.category._id" [(ngModel)]="prdToAdd.category.name" class="form-select form-select-lg" aria-label="categories selection" required>
-            <option value="" selected disabled>Select a category</option>
-            <option *ngFor="let cat of categories" [value]="cat._id">{{cat.name}}</option>
+          <select class="form-select form-select-lg " aria-label="brandName selection" [(ngModel)]="prdToAdd.category.name" name="brandName">
+            <option value="brandName" selected disabled> Category</option>
+            <option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</option>
           </select>
           </div>
       </div>

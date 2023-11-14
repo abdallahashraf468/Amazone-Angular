@@ -17,7 +17,7 @@ import { DocumentData } from '@angular/fire/firestore';
   styleUrls: ['./update-user-form.component.css']
 })
 export class UpdateUserFormComponent implements OnInit {
-  isUpdate: boolean = false;
+  // : boolean = false;
   editedUser: IfirebaseUsers;
   userToUpdate: IfirebaseUsers = {} as IfirebaseUsers;
 
@@ -27,13 +27,13 @@ export class UpdateUserFormComponent implements OnInit {
     private firebase: FirebasePrdService,
     private router: Router,
     private dialogRef: MatDialogRef<UpdateUserFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: IfirebaseUsers, isUpdate: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { user: IfirebaseUsers,},
     private fb: FormBuilder
   ) {
     this.editedUser = { ...data.user };
-    this.isUpdate = data.isUpdate;
+    // this. = data.;
     this.userForm = this.fb.group({
-      _id: [''],
+      id: [''],
       createdAt: [''],
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,6 +43,11 @@ export class UpdateUserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    const creationTime = new Date(this.data.user.createdAt);
+    this.userForm.patchValue(
+      {...this.data.user,
+      createdAt: creationTime,}
+    );
   }
 
   getUsers(): void {
@@ -51,16 +56,14 @@ export class UpdateUserFormComponent implements OnInit {
         const mappedUsers: IfirebaseUsers[] = users.map((userData) => {
           if ('id' in userData) {
             const { id, ...rest } = userData;
-            return { _id: id, ...rest } as IfirebaseUsers;
+            return { id: id, ...rest } as IfirebaseUsers;
           }
           return userData as IfirebaseUsers;
         });
 
-        const userIdToUpdate = this.editedUser?._id;
-        this.userToUpdate = mappedUsers.find(user => user._id === userIdToUpdate) || {} as IfirebaseUsers;
+        const userIdToUpdate = this.editedUser?.id;
+        this.userToUpdate = mappedUsers.find(user => user.id === userIdToUpdate) || {} as IfirebaseUsers;
 
-        // Patch the form values with the userToUpdate data
-        this.userForm.patchValue(this.userToUpdate);
       },
       error: (err) => {
         console.log('Error fetching users:', err);

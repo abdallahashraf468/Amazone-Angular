@@ -83,7 +83,7 @@ openUpdateUserForm(user: IfirebaseUsers): void {
         const mappedUsers: IfirebaseUsers[] = users.map((userData) => {
           if ('id' in userData) {
             const { id, ...rest } = userData;
-            return { _id: id, ...rest } as IfirebaseUsers;
+            return { id: id, ...rest } as IfirebaseUsers;
           }
           return userData as IfirebaseUsers;
         });

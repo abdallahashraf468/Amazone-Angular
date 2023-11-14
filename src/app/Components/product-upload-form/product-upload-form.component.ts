@@ -14,6 +14,8 @@ export class ProductUploadFormComponent {
   prds:IfireBseProduct[]=[];
   brands: any[] = [];
   categories: any[] = [];
+  isUpdate: boolean = false;
+
   
   private readonly storage: Storage = inject(Storage);
   constructor(private fireBase:FirebasePrdService, private router: Router ) { 
@@ -124,7 +126,11 @@ export class ProductUploadFormComponent {
   updateProduct(){
     this.fireBase.updateProduct(this.prdToAdd);
   }
-  
+  ngOnInit(): void {
+    this.getProducts();
+    this.getBrands();
+    this.getCtaegories()
+  }
   
   uploadFile(input: HTMLInputElement) {
     if (!input.files) return
@@ -140,3 +146,4 @@ export class ProductUploadFormComponent {
     }
   }
 }
+
