@@ -1,3 +1,4 @@
+import { UsersModule } from './Components/final/users/users.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // import { ParentCComponent } from './Components/parent-c/parent-c.component';
@@ -17,9 +18,11 @@ import { DashboardComponent } from './Components/final/dashboard/dashboard.compo
 import { StatisticsComponent } from './Components/final/statistics/statistics.component';
 import { MediaComponent } from './Components/final/media/media.component';
 import { ProductUploadFormComponent } from './Components/product-upload-form/product-upload-form.component';
+import { BestSellerComponent } from './Components/best-seller/best-seller.component';
 import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
 import { userGuard } from './Guard/user.guard';
 import { LoginComponent } from './login/login.component';
+import { AddUserFormComponent } from './Components/add-user-form/add-user-form.component';
 
 const routes: Routes = [
   // { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -31,13 +34,15 @@ const routes: Routes = [
 
   { path: 'statistics', component: StatisticsComponent, title: "statistics" , canActivate:[userGuard]},
   {
-    path: 'coupens',
-    loadChildren: () => import('./Components/final/coupens/coupens.module').then(m => m.CoupensModule),
+    path: 'users',
+    loadChildren: () => import('./Components/final/users/users.module').then(m => m.UsersModule),
     canActivate:[userGuard]
   },
   { path: 'media', component: MediaComponent, title: "media" },
+
+  {path:'bestseller',component: BestSellerComponent,title : 'bestseller', canActivate:[userGuard]},
   { path: 'updateprd/:id', component: UpdateProductFormComponent, title: "update" },
-  
+
   {
     path: 'settings',
     loadChildren: () => import('./Components/final/settings/settings.module').then(m => m.SettingsModule),
@@ -50,8 +55,8 @@ const routes: Routes = [
     loadChildren: () => import('./Components/products/products.module').then(m => m.ProductsModule),
      canActivate:[userGuard]
   },
-  {path : 'product-upload-form', component: ProductUploadFormComponent, title: "product-upload-form" , canActivate:[userGuard]
-},
+  {path : 'product-upload-form', component: ProductUploadFormComponent, title: "product-upload-form" , canActivate:[userGuard]},
+  {path : 'user-upload-form', component: AddUserFormComponent, title: "user-upload-form" , canActivate:[userGuard]},
 
   // { path: "parent", component: ParentCComponent, title: "products-parent Page", canActivate: [userGuard] },
   // { path: "category", component: CategoryComponent, title: "category Page", canActivate: [userGuard] },

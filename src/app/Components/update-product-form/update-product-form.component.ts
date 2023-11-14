@@ -178,5 +178,9 @@ productForm:FormGroup;
     this.productForm.get('categorySlug')?.setValue(this.data.category.slug);
   }
   
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> main

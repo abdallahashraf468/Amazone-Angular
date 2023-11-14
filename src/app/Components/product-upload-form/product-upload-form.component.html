@@ -25,7 +25,6 @@
                 (ProductNameInput.dirty || ProductNameInput.touched) &&
                 !ProductNameInput.valid
             }"
-            [(ngModel)]="prdToAdd.title"
             #ProductNameInput="ngModel"
             minlength="3"
             pattern="^[A-Za-z0-9_\\-\\.\s]{1,255}$"
@@ -418,7 +417,7 @@
       <div class="col-md-12 mb-4">
         <!-- createTime    -->
         <div class="form-outline">
-          <label class="form-label ms-3" for="updatedAt"
+          <label class="form-label ms-3" for="createdAt"
             >Create Time:</label
           >
           <input
@@ -479,9 +478,8 @@
         <button
           [disabled]="addProductForm.invalid"
           class="btn btn-primary btn-lg"
-          [attr.value]="isUpdate ? 'Update' : 'Add Product'"
         >
-          {{ isUpdate ? "Update" : "Add Product" }}
+          Add Product
         </button>
       </div>
     </div>

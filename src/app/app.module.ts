@@ -3,7 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { LoginComponent } from './login/login.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
+
+
 // import { HeaderComponent } from './Components/header/header.component';
 // import { ProductsComponent } from './Components/products/products.component';
 // import { FooterComponent } from './Components/footer/footer.component';
@@ -55,12 +62,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { Dialog2Component } from './Components/header/dialog2/dialog2.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatSelectModule} from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { LoginComponent } from './login/login.component';
-import { NgxSpinnerModule } from "ngx-spinner";
-import { UpdateProductFormComponent } from './Components/update-product-form/update-product-form.component';
+/* --------------------------------------------------------- */
+
+import { BestSellerComponent } from './Components/best-seller/best-seller.component';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button'; // Import other necessary modules if required
+import { TagModule } from 'primeng/tag';
+import { AppComponent } from './app.component';
+/* --------------------------------------------------------- */
+import { ToastrModule } from 'ngx-toastr';
+import { UpdateUserFormComponent } from './Components/update-user-form/update-user-form.component';
+import { AddUserFormComponent } from './Components/add-user-form/add-user-form.component';
 
 
 const firebaseConfig = {
@@ -75,7 +87,9 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent,
+    UpdateProductFormComponent,
+    LoginComponent,
+    HeaderComponent,
     // ProductsComponent,
     // FooterComponent,
     SideMenuComponent,
@@ -104,10 +118,15 @@ const firebaseConfig = {
     ProductUploadFormComponent,
     DialogComponent,
     Dialog2Component,
-    UpdateProductFormComponent,
-    LoginComponent,
+    BestSellerComponent,
+    UpdateUserFormComponent,
+    AddUserFormComponent,
   ],
   imports: [
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),
     MatTableModule,
     BrowserModule,
     AppRoutingModule,
@@ -132,10 +151,26 @@ const firebaseConfig = {
     MatIconModule,
     MatBadgeModule,
     MatProgressBarModule,
-    MatSelectModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    NgxSpinnerModule.forRoot({ type: 'square-jelly-box' })
+/* --------------------------------------------------------- */
+
+    CarouselModule,
+    ButtonModule,
+    TagModule,
+/* --------------------------------------------------------- */
+ToastrModule.forRoot( {
+  timeOut:1100,
+  progressBar:true,
+  progressAnimation:'increasing',
+  positionClass: 'toast-top-center',
+  closeButton:true,
+  maxOpened:2,
+
+
+  preventDuplicates: true
+
+}),
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
