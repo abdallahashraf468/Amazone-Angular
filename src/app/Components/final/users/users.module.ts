@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CoupensRoutingModule } from './coupens-routing.module';
-import { CoupensComponent } from './coupens.component';
+import { UsersRoutingModule } from './users-routing.module';
+import { UsersComponent } from './users.component';
 import { CoupensListComponent } from './coupens-list/coupens-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -17,14 +17,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
-    CoupensComponent,
+    UsersComponent,
     CoupensListComponent
   ],
   imports: [
     MatIconModule,
     FormsModule,
     CommonModule,
-    CoupensRoutingModule,
+    UsersRoutingModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -37,4 +37,4 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatNativeDateModule,
   ]
 })
-export class CoupensModule { }
+export class UsersModule { }

@@ -48,19 +48,9 @@ export const navbarData: InavbarData[] = [
     label: 'Statistics',
   },
   {
-    routeLink: 'coupens',
-    icon: 'fal fa-tags',
-    label: 'Coupens',
-    items: [
-      {
-        routeLink: 'coupens/list',
-        label: 'List Coupens',
-      },
-      {
-        routeLink: 'coupens/create',
-        label: 'Create Coupens',
-      }
-    ],
+    routeLink: 'users/users',
+    icon: 'fal fa-users',
+    label: 'Users',
     expanded: false,
   },
   {

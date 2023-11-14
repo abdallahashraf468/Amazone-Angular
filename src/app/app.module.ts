@@ -72,6 +72,7 @@ import { AppComponent } from './app.component';
 /* --------------------------------------------------------- */
 import { ToastrModule } from 'ngx-toastr';
 import { UpdateUserFormComponent } from './Components/update-user-form/update-user-form.component';
+import { AddUserFormComponent } from './Components/add-user-form/add-user-form.component';
 
 
 const firebaseConfig = {
@@ -119,6 +120,7 @@ const firebaseConfig = {
     Dialog2Component,
     BestSellerComponent,
     UpdateUserFormComponent,
+    AddUserFormComponent,
   ],
   imports: [
     MatSelectModule,

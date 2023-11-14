@@ -12,12 +12,12 @@ import { UpdateUserFormComponent } from '../../update-user-form/update-user-form
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-coupens',
-  templateUrl: './coupens.component.html',
-  styleUrls: ['./coupens.component.css'],
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css'],
 })
-export class CoupensComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['_id', 'createdAt', 'email', 'name', 'update', 'delete'];
+export class UsersComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['id', 'createdAt', 'email', 'name', 'update', 'delete'];
   dataSource: MatTableDataSource<IfirebaseUsers> = new MatTableDataSource<IfirebaseUsers>([]);
   clickedRows = new Set<IfirebaseUsers>();
   date = new Date();
@@ -58,9 +58,10 @@ export class CoupensComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+    goToForm(){
+      this.router.navigate(['user-upload-form']);
+    }
 
-  // coupens.component.ts
-  // coupens.component.ts
 openUpdateUserForm(user: IfirebaseUsers): void {
   const dialogRef = this.dialog.open(UpdateUserFormComponent, {
     data: { user, isUpdate: true }, // Pass the data object with 'user' and 'isUpdate' properties
@@ -100,10 +101,10 @@ openUpdateUserForm(user: IfirebaseUsers): void {
 
 
   deleteUser(id: string) {
-    console.log('Deleting product...');
+    console.log('Deleting user...');
     console.log(id);
 
-    this.firebasePrdService.deleteProduct(id)
+    this.firebasePrdService.deleteUser(id)
       .then(() => {
         console.log(`User with ID ${id} deleted successfully.`);
         this.getUsers();

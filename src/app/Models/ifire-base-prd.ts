@@ -26,7 +26,6 @@ export interface IfireBseProduct {
     subcategory: any[];
     title: string;
     updatedAt: string;
-    _id: string;
   //   percentageDiscountAfterDiscount: number;
   // percentageDiscountOriginalPrice: number;
   }

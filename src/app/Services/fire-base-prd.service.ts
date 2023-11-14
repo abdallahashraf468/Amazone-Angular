@@ -30,7 +30,7 @@ export class FirebasePrdService {
 
   updateProduct(product: IfireBseProduct) {
     const productObject = { ...product };
-    const prdRef = doc(this.fsObject, 'products', product._id);
+    const prdRef = doc(this.fsObject, 'products', product.id);
     alert("Product Updated Successfully");
     return updateDoc(prdRef, productObject);
   }
@@ -42,12 +42,9 @@ export class FirebasePrdService {
       console.log('Document successfully deleted!');
     } catch (error) {
       console.error('Error deleting document:', error);
-      throw error; // Re-throw the error to propagate it further if needed
     }
   }
-
-
-
+  
   getBrands() {
     const brands = collection(this.fsObject, 'brands');
     return collectionData(brands, { idField: 'id' });
@@ -96,7 +93,6 @@ export class FirebasePrdService {
       console.log('User successfully deleted!');
     } catch (error) {
       console.error('Error deleting user:', error);
-      throw error; // Re-throw the error to propagate it further if needed
     }
   }
 
