@@ -10,7 +10,6 @@ import {
 import { Router } from '@angular/router';
 import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
 import { DocumentData } from '@angular/fire/firestore';
-import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-update-user-form',
@@ -18,7 +17,6 @@ import { Timestamp } from 'firebase/firestore';
   styleUrls: ['./update-user-form.component.css']
 })
 export class UpdateUserFormComponent implements OnInit {
-  // : boolean = false;
   editedUser: IfirebaseUsers;
   userToUpdate: IfirebaseUsers = {} as IfirebaseUsers;
 
@@ -28,18 +26,16 @@ export class UpdateUserFormComponent implements OnInit {
     private firebase: FirebasePrdService,
     private router: Router,
     private dialogRef: MatDialogRef<UpdateUserFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: IfirebaseUsers,},
+    @Inject(MAT_DIALOG_DATA) public data: { user: IfirebaseUsers },
     private fb: FormBuilder
   ) {
     this.editedUser = { ...data.user };
-    // this. = data.;
     this.userForm = this.fb.group({
       id: [''],
       createdAt: [''],
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required, Validators.minLength(3)]],
     });
-    this.userToUpdate = {} as IfirebaseUsers; // Initialize userToUpdate
   }
 
   ngOnInit(): void {
@@ -64,7 +60,6 @@ export class UpdateUserFormComponent implements OnInit {
 
         const userIdToUpdate = this.editedUser?.id;
         this.userToUpdate = mappedUsers.find(user => user.id === userIdToUpdate) || {} as IfirebaseUsers;
-
       },
       error: (err) => {
         console.log('Error fetching users:', err);
