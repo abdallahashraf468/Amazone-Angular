@@ -297,6 +297,7 @@
             #productImagesInput="ngModel"
             [(ngModel)]="prdToAdd.images"
             required
+            (change)="uploadProductImages($event)"
             class="form-control form-control-lg"
           />
           <span class="invalid-feedback">

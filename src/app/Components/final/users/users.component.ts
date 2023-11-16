@@ -22,7 +22,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<IfirebaseUsers> = new MatTableDataSource<IfirebaseUsers>([]);
   clickedRows = new Set<IfirebaseUsers>();
   date = new Date();
-  isUpdate:boolean=false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
