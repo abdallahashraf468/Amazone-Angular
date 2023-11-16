@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
+import { Storage, ref, uploadBytesResumable, getDownloadURL  } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
 import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
@@ -17,8 +17,7 @@ export class ProductUploadFormComponent {
   isUpdate: boolean = false;
 
   
-  private readonly storage: Storage = inject(Storage);
-  constructor(private fireBase:FirebasePrdService, private router: Router ) { 
+  constructor(private fireBase:FirebasePrdService, private router: Router, private storage:Storage ) { 
     this.prdToAdd = {
       brand: {
         name: '',
@@ -85,7 +84,7 @@ export class ProductUploadFormComponent {
   getBrands(){
     this.fireBase.getBrands().subscribe({
       next: (data) => {
-        // console.log(data);
+        console.log(data);
         
         this.brands = data.map((documentData: any) => {
           return {
@@ -132,18 +131,45 @@ export class ProductUploadFormComponent {
     this.getCtaegories()
   }
   
-  uploadFile(input: HTMLInputElement) {
-    if (!input.files) return
+  // uploadFile(input: HTMLInputElement) {
+  //   if (!input.files) return
 
+  //   const files: FileList = input.files;
+
+  //   for (let i = 0; i < files.length; i++) {
+  //     const file = files.item(i);
+  //     if (file) {
+  //       const storageRef = ref(this.storage, file.name);
+  //       uploadBytesResumable(storageRef, file);
+  //     }
+  //   }
+  // }
+  async uploadBrandImage(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+  
     const files: FileList = input.files;
-
+  
     for (let i = 0; i < files.length; i++) {
       const file = files.item(i);
       if (file) {
-        const storageRef = ref(this.storage, file.name);
-        uploadBytesResumable(storageRef, file);
+        const storageRef = ref(this.storage, `brandsImages/${file.name}`); // Replace 'images' with your desired path
+  
+        const uploadTask = uploadBytesResumable(storageRef, file);
+  
+        const snapshot = await uploadTask;
+  
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        console.log('File available at', downloadURL);
+  
+        const fileInfo = {
+          filename: file.name,
+          downloadURL: downloadURL
+        };
+  
       }
     }
   }
+  
 }
 

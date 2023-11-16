@@ -43,7 +43,7 @@
       <div class="col-md-12 mb-4">
         <!-- title    -->
         <div class="form-outline">
-          <label class="form-label ms-3" for="title">Slug:</label>
+          <label class="form-label ms-3" for="slug">Slug:</label>
           <input
             type="text"
             id="slug"
@@ -98,20 +98,24 @@
         </div>
       </div>
 
-      <div class="col-md-12 mb-4">
+      <div class="col-md-12 mb-4">  <!-- brand    -->
         <div class="form-outline">
-          <label for="brandName" class="form-label ms-3 ">Brand</label>
-          <select class="form-select form-select-lg " aria-label="brandName selection" [(ngModel)]="prdToAdd.brand.name" name="brandName">
-            <option value="brandName" selected disabled> Brands</option>
-            <option *ngFor="let brand of brands" [value]="brand.name">{{brand.name}}</option>
+          <label for="brandNameSelct" class="form-label ms-3 ">Brand</label>
+          <select id="brandNameSelct" class="form-select form-select-lg" [(ngModel)]="prdToAdd.brand" name="brandName">
+            <option value="" selected disabled>Brands</option>
+            <option *ngFor="let brand of brands" [ngValue]="{ _id: brand._id, name: brand.name }">
+              {{ brand.name }}
+            </option>
           </select>
+          
           </div>
       </div>
-      <div class="col-md-12 mb-4">
+      <div class="col-md-12 mb-4"> <!-- brand slug
+            -->
         <div class="form-outline">
-          <label for="brandSlug" class="form-label ms-3 ">Brand slug</label>
-          <select class="form-select form-select-lg " aria-label="brandSlug selection" [(ngModel)]="prdToAdd.brand.slug" name="brandSlug">
-            <option value="brandSlug" selected disabled> Brand Slug</option>
+          <label for="brandSlugSelect" class="form-label ms-3 ">Brand slug</label>
+          <select id="brandSlugSelect" class="form-select form-select-lg " aria-label="brandSlug selection" [(ngModel)]="prdToAdd.brand.slug" name="brandSlug">
+            <option value="" selected disabled> Brand Slug</option>
             <option *ngFor="let brand of brands" [value]="brand.slug" name="brandSlug">{{brand.slug}}</option>
           </select>
           
@@ -300,21 +304,49 @@
       </div>
       <div class="col-md-12 mb-4">
         <div class="form-outline">
-          <label for="categories" class="form-label ms-3 "></label>
-          <select class="form-select form-select-lg " aria-label="brandName selection" [(ngModel)]="prdToAdd.category.name" name="brandName">
-            <option value="brandName" selected disabled> Category</option>
+          <label for="categorySelect" class="form-label ms-3 ">Category</label>
+          <select id="categorySelect" class="form-select form-select-lg " aria-label="categoryName selection" [(ngModel)]="prdToAdd.category.name" name="categoryName">
+            <option value="" selected disabled> Category</option>
             <option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</option>
           </select>
           </div>
       </div>
       <div class="col-md-12 mb-4">
         <div class="form-outline">
-          <label for="catSlug" class="form-label ms-3 "></label>
-          <select id="categorySlug" name="categorySlug" [(ngModel)]="prdToAdd.category.slug" class="form-select form-select-lg" aria-label="categories selection" required>
+          <label for="categorySlugSelect" class="form-label ms-3 ">Category Slug</label>
+          <select id="categorySlugSelect" name="categorySlug" [(ngModel)]="prdToAdd.category.slug" class="form-select form-select-lg" aria-label="categories selection" required>
             <option value="" selected disabled>Select a category slug</option>
             <option *ngFor="let cat of categories" [value]="cat.slug">{{cat.slug}}</option>
           </select>
           </div>
+      </div>
+      <div class="col-md-12 mb-4">
+        <!-- category image    -->
+        <div class="form-outline">
+          <label class="form-label ms-3" for="categoryImage"
+            >Category Image:</label
+          >
+          <input
+            [ngClass]="{
+              'is-invalid':
+                (ProductCategoryImageInput.dirty ||
+                  ProductCategoryImageInput.touched) &&
+                !ProductCategoryImageInput.valid
+            }"
+            type="file"
+            #ProductCategoryImageInput="ngModel"
+            id="categoryImage"
+            name="categoryImage"
+            [(ngModel)]="prdToAdd.category.image"
+            required
+            class="form-control form-control-lg"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="ProductCategoryImageInput.errors?.['required']">
+              product category image is required
+            </span>
+          </span>
+        </div>
       </div>
       <div class="col-md-12 mb-4">
         <!-- ratings average -->
