@@ -69,6 +69,9 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button'; // Import other necessary modules if required
 import { TagModule } from 'primeng/tag';
 import { AppComponent } from './app.component';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 /* --------------------------------------------------------- */
 
 
@@ -80,6 +83,7 @@ const firebaseConfig = {
   messagingSenderId: "947539259472",
   appId: "1:947539259472:web:f1f9925e12528cdfe92155"
 };
+
 
 @NgModule({
   declarations: [
@@ -132,6 +136,12 @@ const firebaseConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
+
+
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+
     OverlayModule,
     CdkMenuModule,
     CanvasJSAngularChartsModule,

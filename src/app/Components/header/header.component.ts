@@ -89,6 +89,7 @@ export class HeaderComponent implements OnInit {
   logOut(){
     this.UserAuthenService.userLogout()
     this.user = this.UserAuthenService.isUserLoggedInOrNot;
+    localStorage.removeItem('currentUser');
 
 
   }
