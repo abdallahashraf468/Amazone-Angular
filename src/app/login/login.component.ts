@@ -1,12 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserAuthenServiceService } from 'src/app/Services/user-authen-service.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../Services/aut-service.service';
 
 
 
 
 // {with localstorge }
 
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../Services/aut-service.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,42 +20,51 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   isUserLogged: boolean=false;
+  user:boolean = true
 
-  constructor(private authService: AuthService,private router: Router) {}
+  constructor(private authService: AuthService,private Router: Router,private Toster:ToastrService) {
+    Router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.user = this.authService.isUserLogged;
+
+        if (this.user && val.url === '/login') {
+          this.Router.navigate(['/dashboard']);
+        } else if (!this.user && val.url !== '/login') {
+        }
+      }
+    });
+  }
 
   login(): void {
     this.authService.signInWithEmailAndPassword(this.email, this.password)
       .then(() => {
         // Handle successful login, maybe redirect or update UI
-        this.router.navigate(['dashboard']);
+        this.Toster.success("Success", "Login Success")
+        this.Router.navigate(['dashboard']);
       })
       .catch(error => {
         // Handle error, show error message
         console.error('Login error:', error);
       });
       this.isUserLogged=this.authService.isUserLogged
+}
+logout(): void {
+  this.authService.signOut()
+  .then(() => {
+    // Handle successful logout, maybe redirect or update UI
+  })
+  .catch(error => {
+    // Handle error, show error message
+    console.error('Logout error:', error);
+    });
 
-  }
-
-  logout(): void {
-    this.authService.signOut()
-    .then(() => {
-      // Handle successful logout, maybe redirect or update UI
-    })
-    .catch(error => {
-      // Handle error, show error message
-      console.error('Logout error:', error);
-      });
-
-      this.isUserLogged=this.authService.isUserLogged
-  }
-
-
-  forgotPassword(): void {
-    // Logic for handling forgot password functionality
-  }
-
-  ngOnInit(){
     this.isUserLogged=this.authService.isUserLogged
-  }
+}
+
+
+
+
+ngOnInit(): void {
+  this.isUserLogged=this.authService.isUserLogged
+}
 }

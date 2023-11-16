@@ -7,6 +7,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Dialog2Component } from './dialog2/dialog2.component';
 import { UserAuthenServiceService } from 'src/app/Services/user-authen-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('menuTrigger')  menuTrigger!: MatMenuTrigger;
   user:boolean = true
 
-  constructor( private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog  , private UserAuthenService:UserAuthenServiceService) { }
+  constructor(private Toster:ToastrService ,private Router: Router,  private productService:FirebasePrdService, public dialog: MatDialog  , private UserAuthenService:UserAuthenServiceService) { }
 
 
   openDialog() {
@@ -68,9 +69,7 @@ export class HeaderComponent implements OnInit {
     }
     return styleClass;
   }
-  goToForm(){
-    this.Router.navigate(['/product-upload-form']);
-  }
+  
 
   checkCanShowSearchAsOverlay(innerWidth: number):void{
     if(innerWidth < 845){
@@ -90,6 +89,7 @@ export class HeaderComponent implements OnInit {
     this.UserAuthenService.userLogout()
     this.user = this.UserAuthenService.isUserLoggedInOrNot;
     localStorage.removeItem('currentUser');
+    this.Toster.error("logOut", "logOut Success")
 
 
   }

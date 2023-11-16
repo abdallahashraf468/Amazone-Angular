@@ -21,7 +21,7 @@ import { UpdateProductFormComponent } from '../update-product-form/update-produc
 export class ProductsComponent implements OnInit {
 
   // private readonly storage: Storage = inject(Storage);
-  displayedColumns: string[] = ['_id','imageCover', 'title', 'price', 'quantity','inStock','update','delete'];
+  displayedColumns: string[] = ['id','imageCover', 'title', 'price', 'quantity','inStock','update','delete'];
   dataSource: MatTableDataSource<IfireBseProduct> = new MatTableDataSource<IfireBseProduct>([]);
   clickedRows = new Set<IfireBseProduct>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,7 +33,6 @@ export class ProductsComponent implements OnInit {
   isUpdate:boolean=false;
   coverImageFileName: string = '';
   prodductImageFileName: string = '';
- 
 
   constructor(private router: Router,
     private storage: Storage,
@@ -68,7 +67,6 @@ export class ProductsComponent implements OnInit {
         subcategory: [],
         title: '',
         updatedAt: '',
-        _id: ''
       };
   }
 
@@ -88,7 +86,7 @@ export class ProductsComponent implements OnInit {
         const products: IfireBseProduct[] = product.map((prdData) => {
           if ('id' in prdData) {
             const { id, ...rest } = prdData;
-            return { _id: id, ...rest } as IfireBseProduct;
+            return { id: id, ...rest } as IfireBseProduct;
           }
           return prdData as IfireBseProduct;
         });
@@ -117,6 +115,9 @@ export class ProductsComponent implements OnInit {
       .catch((error) => {
         console.error(`Error deleting product with ID ${id}:`, error);
       });
+  }
+  goToForm(){
+    this.router.navigate(['/product-upload-form']);
   }
   
   onRowClick(row: IfireBseProduct): void {

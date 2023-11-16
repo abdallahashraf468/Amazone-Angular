@@ -73,6 +73,9 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 /* --------------------------------------------------------- */
+import { ToastrModule } from 'ngx-toastr';
+import { UpdateUserFormComponent } from './Components/update-user-form/update-user-form.component';
+import { AddUserFormComponent } from './Components/add-user-form/add-user-form.component';
 
 
 const firebaseConfig = {
@@ -120,6 +123,8 @@ const firebaseConfig = {
     DialogComponent,
     Dialog2Component,
     BestSellerComponent,
+    UpdateUserFormComponent,
+    AddUserFormComponent,
   ],
   imports: [
     MatSelectModule,
@@ -162,6 +167,19 @@ const firebaseConfig = {
     ButtonModule,
     TagModule,
 /* --------------------------------------------------------- */
+ToastrModule.forRoot( {
+  timeOut:1100,
+  progressBar:true,
+  progressAnimation:'increasing',
+  positionClass: 'toast-top-center',
+  closeButton:true,
+  maxOpened:2,
+
+
+  preventDuplicates: true
+
+}),
+
 
   ],
   providers: [],

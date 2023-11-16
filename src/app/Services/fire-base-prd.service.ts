@@ -2,6 +2,7 @@ import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, 
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { IfireBseProduct } from '../Models/ifire-base-prd';
 import { Observable, map } from 'rxjs';
+import { IfirebaseUsers } from '../Models/ifirebase-users';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class FirebasePrdService {
 
   updateProduct(product: IfireBseProduct) {
     const productObject = { ...product };
-    const prdRef = doc(this.fsObject, 'products', product._id);
+    const prdRef = doc(this.fsObject, 'products', product.id);
     alert("Product Updated Successfully");
     return updateDoc(prdRef, productObject);
   }
@@ -41,12 +42,9 @@ export class FirebasePrdService {
       console.log('Document successfully deleted!');
     } catch (error) {
       console.error('Error deleting document:', error);
-      throw error; // Re-throw the error to propagate it further if needed
     }
   }
-
-
-
+  
   getBrands() {
     const brands = collection(this.fsObject, 'brands');
     return collectionData(brands, { idField: 'id' });
@@ -70,6 +68,32 @@ export class FirebasePrdService {
   getUsers() {
     const users = collection(this.fsObject, 'users');
     return collectionData(users, { idField: 'id' });
+  }
+
+  getUserById(id: string) {
+    const user = doc(this.fsObject, 'users', id);
+    return getDoc(user);
+  }
+
+  addUser(user: IfirebaseUsers) {
+    return addDoc(collection(this.fsObject, 'users'), user);
+  }
+
+  updateUser(user: IfirebaseUsers) {
+    const userObject = { ...user };
+    const userRef = doc(this.fsObject, 'users', user.id);
+    return updateDoc(userRef, userObject);
+  }
+
+  async deleteUser(_id: string) {
+    const userRef = doc(this.fsObject, 'users', _id);
+
+    try {
+      await deleteDoc(userRef);
+      console.log('User successfully deleted!');
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
   }
 
   //////////////////////////////////////////////////////////////
@@ -148,7 +172,7 @@ export class FirebasePrdService {
     );
   }
 
-  
+
   // ////////////////////////////////////////////////////////////////
 
   filterProducts(value: string): void {

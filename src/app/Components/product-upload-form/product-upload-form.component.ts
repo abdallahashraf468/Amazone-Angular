@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
+import { Storage, ref, uploadBytesResumable, getDownloadURL  } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { IfireBseProduct } from 'src/app/Models/ifire-base-prd';
 import { FirebasePrdService } from 'src/app/Services/fire-base-prd.service';
@@ -15,10 +15,13 @@ export class ProductUploadFormComponent {
   brands: any[] = [];
   categories: any[] = [];
   isUpdate: boolean = false;
+  brandImageUrl:string ='';
+  categoryImageUrl:string ='';
+  coverImageUrl:string ='';
+  ImagesUrls:string[] =[];
 
   
-  private readonly storage: Storage = inject(Storage);
-  constructor(private fireBase:FirebasePrdService, private router: Router ) { 
+  constructor(private fireBase:FirebasePrdService, private router: Router, private storage:Storage ) { 
     this.prdToAdd = {
       brand: {
         name: '',
@@ -47,7 +50,6 @@ export class ProductUploadFormComponent {
       subcategory: [],
       title: '',
       updatedAt: '',
-      _id: ''
     };
   }
   getProducts(){
@@ -86,7 +88,7 @@ export class ProductUploadFormComponent {
   getBrands(){
     this.fireBase.getBrands().subscribe({
       next: (data) => {
-        // console.log(data);
+        console.log(data);
         
         this.brands = data.map((documentData: any) => {
           return {
@@ -116,9 +118,106 @@ export class ProductUploadFormComponent {
       }
     })
   };
+
+  async uploadImageCover(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    const files: FileList = input.files;
+    const filenames: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files.item(i);
+      if (file) {
+        const storageRef = ref(this.storage, `coverImages/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        const snapshot = await uploadTask;
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        // Store the download URL of the brand image
+        this.coverImageUrl = downloadURL;
+
+        // Track filenames for future use
+        filenames.push(file.name);
+      }
+    }
+  }
+  async uploadBrandImage(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    const files: FileList = input.files;
+    const filenames: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files.item(i);
+      if (file) {
+        const storageRef = ref(this.storage, `brandsImages/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        const snapshot = await uploadTask;
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        // Store the download URL of the brand image
+        this.brandImageUrl = downloadURL;
+
+        // Track filenames for future use
+        filenames.push(file.name);
+      }
+    }
+  }
+  async uploadCategoryImage(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    const files: FileList = input.files;
+    const filenames: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files.item(i);
+      if (file) {
+        const storageRef = ref(this.storage, `categoriesImages/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        const snapshot = await uploadTask;
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        // Store the download URL of the brand image
+        this.categoryImageUrl = downloadURL;
+
+        // Track filenames for future use
+        filenames.push(file.name);
+      }
+    }
+  }
+  async uploadProductImages(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    const files: FileList = input.files;
+    const filenames: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files.item(i);
+      if (file) {
+        const storageRef = ref(this.storage, `ProductsImages/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        const snapshot = await uploadTask;
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        // Store the download URL of the brand image
+        this.ImagesUrls.push(downloadURL) ;
+
+        // Track filenames for future use
+        filenames.push(file.name);
+      }
+    }
+  }
   
 
   addProduct(){
+    this.prdToAdd.imageCover = this.coverImageUrl;
+    this.prdToAdd.brand.image = this.brandImageUrl;
+    this.prdToAdd.category.image = this.categoryImageUrl;
+    this.prdToAdd.images = this.ImagesUrls;
     this.fireBase.addProduct(this.prdToAdd);
     alert('Product Added Successfully');
     this.router.navigate(['/products/level1.1']);
@@ -133,17 +232,20 @@ export class ProductUploadFormComponent {
     this.getCtaegories()
   }
   
-  uploadFile(input: HTMLInputElement) {
-    if (!input.files) return
+  // uploadFile(input: HTMLInputElement) {
+  //   if (!input.files) return
 
-    const files: FileList = input.files;
+  //   const files: FileList = input.files;
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files.item(i);
-      if (file) {
-        const storageRef = ref(this.storage, file.name);
-        uploadBytesResumable(storageRef, file);
-      }
-    }
-  }
+  //   for (let i = 0; i < files.length; i++) {
+  //     const file = files.item(i);
+  //     if (file) {
+  //       const storageRef = ref(this.storage, file.name);
+  //       uploadBytesResumable(storageRef, file);
+  //     }
+  //   }
+  // }
+  
+  
 }
+

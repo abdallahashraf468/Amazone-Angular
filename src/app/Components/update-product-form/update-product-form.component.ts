@@ -28,44 +28,22 @@ productForm:FormGroup;
     private fb: FormBuilder,
     ) {
       this.productForm = this.fb.group({
-        title: ['', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern('^[A-Za-z0-9_\\-\\.s]{1,255}$'),
-        ]],
-        description: ['', Validators.required],
-        brands: ['', Validators.required],
-        brandSlug: ['', Validators.required],
-        price: ['', [
-          Validators.required,
-          Validators.pattern('^d+(.d{2})?$'),
-          Validators.minLength(1),
-        ]],
-        priceAfterDiscount: ['', [
-          Validators.required,
-          Validators.pattern('^d+(.d{2})?$'),
-          Validators.minLength(1),
-        ]],
-        quantity: ['', [
-          Validators.required,
-          Validators.pattern('^d+$'),
-          Validators.minLength(1),
-        ]],
-        categories: ['', Validators.required],
-        categorySlug: ['', Validators.required],
-        ratingsAverage: ['', [
-          Validators.required,
-          Validators.pattern('^d+(.d{2})?$'),
-          Validators.minLength(1),
-        ]],
-        ratingsQuantity: ['', [
-          Validators.required,
-          Validators.pattern('^d+$'),
-          Validators.minLength(1),
-        ]],
-        createTime: ['', Validators.required],
-        updateTime: ['', Validators.required],
+        id: ['', [Validators.required]],
+        title: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        brands: ['', [Validators.required]],
+        brandSlug: ['', [Validators.required]],
+        price: ['', [Validators.required]],
+        priceAfterDiscount: [''],
+        quantity: ['', [Validators.required]],
+        categories: ['', [Validators.required]],
+        categorySlug: ['', [Validators.required]],
+        ratingsAverage: ['', [Validators.required]],
+        ratingsQuantity: ['', [Validators.required]],
+        createTime: ['', [Validators.required]],
+        updateTime: ['', [Validators.required]],
       });
+      
     
     this.prdToUpdate = {
       brand: {
@@ -95,7 +73,6 @@ productForm:FormGroup;
       subcategory: [],
       title: '',
       updatedAt: '',
-      _id: ''
     };
   
   }
@@ -122,7 +99,6 @@ productForm:FormGroup;
             subcategory: documentData.subcategory,
             title: documentData.title,
             updatedAt: documentData.updatedAt,
-            _id: documentData._id
           };
         });
       },
@@ -132,11 +108,9 @@ productForm:FormGroup;
     });
   }
 
-
   updatePeoduct(){
     this.firebase.updateProduct(this.productForm.value).then(
       (val:any)=>{
-        alert('Product Updated Successfully');
         this.router.navigate(['/products/level1.1']);
         this.dialogRf.close(true)
       }
@@ -186,10 +160,22 @@ productForm:FormGroup;
   ngOnInit(): void {
     this.getBrands();
     this.getCategories();
-    this.productForm.patchValue(this.data)
+  
+    // Convert date strings to Date objects
+    const createdAt = new Date(this.data.createdAt);
+    const updatedAt = new Date(this.data.updatedAt);
+  
+    this.productForm.patchValue({
+      ...this.data,
+      createTime: createdAt,
+      updateTime: updatedAt,
+    });
+  
+    // Set the display values for the mat-select elements
     this.productForm.get('brands')?.setValue(this.data.brand.name);
     this.productForm.get('brandSlug')?.setValue(this.data.brand.slug);
     this.productForm.get('categories')?.setValue(this.data.category.name);
-    this.productForm.get('categorySlug')?.setValue(this.data.category.slug);  }
+    this.productForm.get('categorySlug')?.setValue(this.data.category.slug);
+  }
+  
 }
-
