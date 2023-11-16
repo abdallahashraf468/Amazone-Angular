@@ -140,6 +140,7 @@
             name="brandImage"
             [(ngModel)]="prdToAdd.brand.image"
             required
+            (change)="uploadBrandImage($event)"
             class="form-control form-control-lg"
           />
           <span class="invalid-feedback">
@@ -165,6 +166,7 @@
             [ngClass]="{
               'is-invalid': productPriceInput.dirty && !productPriceInput.valid
             }"
+            (change)="uploadImageCover($event)"
             class="form-control form-control-lg"
           />
           <span class="invalid-feedback">
@@ -267,6 +269,8 @@
             required
             #productImageCoverInput="ngModel"
             [(ngModel)]="prdToAdd.imageCover"
+            (change)="uploadImageCover($event)"
+
             class="form-control form-control-lg"
           />
           <span class="invalid-feedback">
@@ -339,6 +343,7 @@
             name="categoryImage"
             [(ngModel)]="prdToAdd.category.image"
             required
+            (change)="uploadCategoryImage($event)"
             class="form-control form-control-lg"
           />
           <span class="invalid-feedback">
