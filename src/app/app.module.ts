@@ -76,7 +76,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { UpdateUserFormComponent } from './Components/update-user-form/update-user-form.component';
 import { AddUserFormComponent } from './Components/add-user-form/add-user-form.component';
-import { KakComponent } from './Components/kak/kak.component';
 
 
 const firebaseConfig = {
@@ -126,7 +125,6 @@ const firebaseConfig = {
     BestSellerComponent,
     UpdateUserFormComponent,
     AddUserFormComponent,
-    KakComponent,
   ],
   imports: [
     MatSelectModule,
