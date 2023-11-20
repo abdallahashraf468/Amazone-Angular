@@ -19,7 +19,7 @@ export class ProductUploadFormComponent {
   categoryImageUrl:string ='';
   coverImageUrl:string ='';
   ImagesUrls:string[] =[];
-  subCategories: any[] = [];
+  subCategories: { name: string, slug: string, createdAt:string, updatedAt:string }[] = [];
   
   constructor(private fireBase:FirebasePrdService, private router: Router, private storage:Storage ) { 
     this.prdToAdd = {
@@ -47,7 +47,12 @@ export class ProductUploadFormComponent {
       ratingsQuantity: 0,
       slug: '',
       sold: 0,
-      subcategory: [],
+      subcategory: [{
+        name: '',
+        slug: '',
+        craetedAt: '',
+        updatedAt: '',
+      }],
       title: '',
       updatedAt: '',
     };
@@ -60,8 +65,6 @@ export class ProductUploadFormComponent {
           return{
             name:documentData.name,
             slug:documentData.slug,
-            image:documentData.image,
-            _id:documentData._id,
             createdAt:documentData.createdAt,
             updatedAt:documentData.updatedAt,
           }

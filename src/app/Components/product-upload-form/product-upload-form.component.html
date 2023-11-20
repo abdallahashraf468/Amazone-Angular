@@ -330,14 +330,18 @@
       </div>
 
       <div class="col-md-12 mb-4">
+        <!-- subCategory -->
         <div class="form-outline">
-          <label for="subCategorySelect" class="form-label ms-3 ">subCategory</label>
-          <select multiple id="subCategorySelect" name="categorySlug" [(ngModel)]="prdToAdd.subcategory" class="form-select form-select-lg" aria-label="subCategories selection" required>
-            <option value="" selected disabled>Select a category slug</option>
-            <option *ngFor="let subCat of subCategories" [value]="subCat.name">{{subCat.name}}</option>
+          <label for="subCategorySelect" class="form-label ms-3 ">Subcategory</label>
+          <select multiple id="subCategorySelect" name="subCategory" [(ngModel)]="prdToAdd.subcategory" class="form-select form-select-lg" aria-label="subCategories selection" required>
+            <option value="" selected disabled>Select subcategories</option>
+            <option *ngFor="let subCat of subCategories" [ngValue]="{ name: subCat.name, slug: subCat.slug, createdAt: subCat.createdAt, updatedAt:subCat.updatedAt}">
+              {{ subCat.name }}
+            </option>
           </select>
-          </div>
+        </div>
       </div>
+      
 
       <div class="col-md-12 mb-4">
         <!-- category image    -->
