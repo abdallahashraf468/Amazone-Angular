@@ -19,7 +19,7 @@ export class ProductUploadFormComponent {
   categoryImageUrl:string ='';
   coverImageUrl:string ='';
   ImagesUrls:string[] =[];
-
+  subCategories: any[] = [];
   
   constructor(private fireBase:FirebasePrdService, private router: Router, private storage:Storage ) { 
     this.prdToAdd = {
@@ -52,6 +52,24 @@ export class ProductUploadFormComponent {
       updatedAt: '',
     };
   }
+
+  getSubCategories(){
+    this.fireBase.getSubCategories().subscribe({
+      next:(data)=>{
+        this.subCategories=data.map((documentData:any)=>{
+          return{
+            name:documentData.name,
+            slug:documentData.slug,
+            image:documentData.image,
+            _id:documentData._id,
+            createdAt:documentData.createdAt,
+            updatedAt:documentData.updatedAt,
+          }
+        })
+      } 
+    })
+  };
+
   getProducts(){
     this.fireBase.getProducts().subscribe({
       next: (data) => {
@@ -76,7 +94,7 @@ export class ProductUploadFormComponent {
             subcategory: documentData.subcategory,
             title: documentData.title,
             updatedAt: documentData.updatedAt,
-            _id: documentData._id
+            // _id: documentData._id
           };
         });
       },
@@ -230,22 +248,7 @@ export class ProductUploadFormComponent {
     this.getProducts();
     this.getBrands();
     this.getCtaegories()
+    this.getSubCategories();
   }
-  
-  // uploadFile(input: HTMLInputElement) {
-  //   if (!input.files) return
-
-  //   const files: FileList = input.files;
-
-  //   for (let i = 0; i < files.length; i++) {
-  //     const file = files.item(i);
-  //     if (file) {
-  //       const storageRef = ref(this.storage, file.name);
-  //       uploadBytesResumable(storageRef, file);
-  //     }
-  //   }
-  // }
-  
-  
 }
 

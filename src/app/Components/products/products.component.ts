@@ -21,7 +21,7 @@ import { UpdateProductFormComponent } from '../update-product-form/update-produc
 export class ProductsComponent implements OnInit {
 
   // private readonly storage: Storage = inject(Storage);
-  displayedColumns: string[] = ['id','imageCover', 'title', 'price', 'quantity','inStock','update','delete'];
+  displayedColumns: string[] = ['id','imageCover', 'title', 'price','sub', 'quantity','inStock','update','delete'];
   dataSource: MatTableDataSource<IfireBseProduct> = new MatTableDataSource<IfireBseProduct>([]);
   clickedRows = new Set<IfireBseProduct>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -310,12 +310,15 @@
       <div class="col-md-12 mb-4">
         <div class="form-outline">
           <label for="categorySelect" class="form-label ms-3 ">Category</label>
-          <select id="categorySelect" class="form-select form-select-lg " aria-label="categoryName selection" [(ngModel)]="prdToAdd.category.name" name="categoryName">
-            <option value="" selected disabled> Category</option>
-            <option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</option>
+          <select id="brandNameSelct" class="form-select form-select-lg" [(ngModel)]="prdToAdd.category" name="categoryName">
+            <option value="" selected disabled>category</option>
+            <option *ngFor="let cat of categories" [ngValue]="{ _id: cat._id, name: cat.name }">
+              {{ cat.name }}
+            </option>
           </select>
           </div>
       </div>
+      
       <div class="col-md-12 mb-4">
         <div class="form-outline">
           <label for="categorySlugSelect" class="form-label ms-3 ">Category Slug</label>
@@ -325,6 +328,17 @@
           </select>
           </div>
       </div>
+
+      <div class="col-md-12 mb-4">
+        <div class="form-outline">
+          <label for="subCategorySelect" class="form-label ms-3 ">subCategory</label>
+          <select multiple id="subCategorySelect" name="categorySlug" [(ngModel)]="prdToAdd.subcategory" class="form-select form-select-lg" aria-label="subCategories selection" required>
+            <option value="" selected disabled>Select a category slug</option>
+            <option *ngFor="let subCat of subCategories" [value]="subCat.name">{{subCat.name}}</option>
+          </select>
+          </div>
+      </div>
+
       <div class="col-md-12 mb-4">
         <!-- category image    -->
         <div class="form-outline">

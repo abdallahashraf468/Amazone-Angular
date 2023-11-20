@@ -170,12 +170,6 @@ productForm:FormGroup;
       createTime: createdAt,
       updateTime: updatedAt,
     });
-  
-    // Set the display values for the mat-select elements
-    this.productForm.get('brands')?.setValue(this.data.brand.name);
-    this.productForm.get('brandSlug')?.setValue(this.data.brand.slug);
-    this.productForm.get('categories')?.setValue(this.data.category.name);
-    this.productForm.get('categorySlug')?.setValue(this.data.category.slug);
   }
   
 }
